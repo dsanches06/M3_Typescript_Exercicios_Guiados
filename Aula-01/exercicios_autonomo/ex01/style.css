@@ -3,6 +3,14 @@ body {
   padding: 20px;
 }
 
-button {
-  margin-left: 5px;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
+.container .exercicios {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
