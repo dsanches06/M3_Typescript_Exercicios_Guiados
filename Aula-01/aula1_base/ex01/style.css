@@ -1,0 +1,33 @@
+body {
+  font-family: Arial;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container button {
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.container button:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.container .exercicio-2,
+.container .exercicio-3{
+  display: flex;
+  gap: 20px;
+}
+
+input[type="text"] {
+  width: 250px;
+  height: 30px;
+  padding: 0;
+}
