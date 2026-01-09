@@ -20,10 +20,20 @@ export default function exercicio_08() {
       //5. Limpa o input com input.value = "".
       inputTarefa.value = "";
 
+      const buttonExcluir = criarButtonExcluir();
+      li.appendChild(buttonExcluir);
+
       exercicio_09();
 
     } else {
       return;
     }
   });
+}
+
+function criarButtonExcluir(): HTMLButtonElement {
+  const buttonExcluir = document.createElement("button");
+  buttonExcluir.textContent = "Excluir";
+  buttonExcluir.className = "btnExcluir";
+  return buttonExcluir;
 }

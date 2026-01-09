@@ -9,7 +9,7 @@ export default function exercicio_09() {
         outputDiv_6.innerHTML = "Nenhuma tarefa adicionada.";
     }
     else if (ulTarefas.children.length === 1) {
-        outputDiv_6.innerHTML = "Você tem uma tarefa pendente.";
+        outputDiv_6.innerHTML = "Você tem 1 tarefa pendente.";
     }
     else {
         outputDiv_6.innerHTML = `Você tem ${ulTarefas.children.length} tarefas pendentes.`;
