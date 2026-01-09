@@ -1,4 +1,4 @@
-
+import exercicio_01 from "./exercicio-01";
 
 /* Exercício 3 — Limpar campo de texto */
 //1. Cria uma função que recebe um input.
@@ -10,5 +10,7 @@ function limparCampos(input: HTMLInputElement): void {
 const inputValue = document.querySelector("#inputValue") as HTMLInputElement;
 //limparCampos(inputValue);
 
-const btnLimpar = document.querySelector("#inputBtn") as HTMLButtonElement;
-btnLimpar.addEventListener("click", limparCampos.bind(null, inputValue));
+export default function exercicio_03() {
+  const btnLimpar = document.querySelector("#inputBtn") as HTMLButtonElement;
+  btnLimpar.addEventListener("click", limparCampos.bind(null, inputValue));
+}

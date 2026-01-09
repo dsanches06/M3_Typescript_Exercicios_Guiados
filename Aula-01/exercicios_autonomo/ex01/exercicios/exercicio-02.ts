@@ -9,4 +9,6 @@ function mensagemErro(error: string): void {
   outputDiv_2.style.color = "red";
 }
 //3. Atribui o valor à div usando innerHTML.
-mensagemErro("Tarefa inválida!");
+export default function exercicio_02() {
+  mensagemErro("Tarefa inválida!");
+}

@@ -6,8 +6,6 @@ import exercicio_05 from "./exercicios/exercicio-05.js";
 import exercicio_06 from "./exercicios/exercicio-06.js";
 import exercicio_07 from "./exercicios/exercicio-07.js";
 import exercicio_08 from "./exercicios/exercicio-08.js";
-
-
 exercicio_01();
 exercicio_02();
 exercicio_03();
@@ -16,4 +14,3 @@ exercicio_05();
 exercicio_06();
 exercicio_07();
 exercicio_08();
-
