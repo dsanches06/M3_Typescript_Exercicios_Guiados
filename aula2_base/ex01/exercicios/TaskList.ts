@@ -1,6 +1,6 @@
 /* Exercício 3 — Array de objetos */
 
-import Task from "./ITask";
+import Task from "./ITask.js";
 import TaskClass from "./TaskClass.js";
 
 const taskListElement = document.querySelector("#taskList") as HTMLUListElement;
