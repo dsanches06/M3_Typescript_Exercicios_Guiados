@@ -1,22 +1,16 @@
-/* Exercício 3 — Array de objetos */
-
+import Category from "./Category.js";
 import Task from "./ITask.js";
 import TaskClass from "./TaskClass.js";
 
 const taskListElement = document.querySelector("#taskList") as HTMLUListElement;
 const inputElement = document.querySelector("#taskInput") as HTMLInputElement;
-const addButton = document.querySelector("#addTaskButton") as HTMLButtonElement;
+const addButton = document.querySelector("#addTaskBtn") as HTMLButtonElement;
+const sortButton = document.querySelector("#sortTaskBtn") as HTMLButtonElement;
+const categorySelect = document.querySelector(
+  "#taskCategory"
+) as HTMLSelectElement;
 
-/* Cria um array chamado listaTarefas que armazene vários objetos do tipo Tarefa.
-Dica lógica passo a passo:
-1. Declare o array com o tipo explícito: Tarefa[].
-2. Adicione 2 ou 3 tarefas de exemplo manualmente.
-3. Percorra o array e mostre apenas os títulos numa div ou ul.*/
-const taskList: Task[] = [
-  { id: 1, title: "Estudar TypeScript", completed: false },
-  { id: 2, title: "Fazer exercícios", completed: true },
-  { id: 3, title: "Ler documentação", completed: false },
-];
+const taskList: Task[] = [];
 
 export function createElementLI(texto: string): HTMLLIElement {
   const li = document.createElement("li");
@@ -26,15 +20,23 @@ export function createElementLI(texto: string): HTMLLIElement {
 
 export default function Exercicio_01(): void {
   taskList.forEach((task) => {
-    const li = createElementLI(
-      `${task.id} - ${task.title} - ${task.completed}`
-    );
+    let result: string = "";
+    if (task.completed) {
+      result = `${
+        task.title
+      } (Concluída em: ${task.completeDate?.toLocaleDateString()})`;
+    } else {
+      result = `${task.id} - ${task.title} - ${task.category}`;
+    }
+
+    const li = createElementLI(result);
     taskListElement.appendChild(li);
-    /*Exercício 7 — Remover tarefa */
+
+    /* Remover tarefa */
     const buttonRemover = document.createElement("button");
     buttonRemover.textContent = "Remover";
     taskListElement.appendChild(buttonRemover);
-    buttonRemover.addEventListener("click", (id) => {
+    buttonRemover.addEventListener("click", () => {
       const index = taskList.findIndex((t) => t.id === task.id);
       if (index !== -1) {
         taskList.splice(index, 1);
@@ -45,16 +47,26 @@ export default function Exercicio_01(): void {
   });
 }
 
-/* Exercício 4 — Adicionar tarefa via input */
+/*  Adicionar tarefa via input */
 addButton.addEventListener("click", () => {
-  const task = inputElement.value;
-  if (task) {
-    const newTask = new TaskClass(Date.now(), task);
+  const title = inputElement.value.trim();
+  const category = categorySelect.value as Category;
+
+  if (title && category) {
+    const newTask = new TaskClass(Date.now(), title, category);
+    //newTask.markCompleted();
     taskList.push(newTask);
     inputElement.value = "";
     updateTaskList();
     styleTasks();
   }
+});
+
+/*  Ordenação Alfabética */
+sortButton.addEventListener("click", () => {
+  taskList.sort((a, b) => a.title.localeCompare(b.title));
+  updateTaskList();
+  styleTasks();
 });
 
 /* Exercício 5 — Renderização dinâmica */

@@ -1,18 +1,10 @@
-/* Exercício 3 — Array de objetos */
 import TaskClass from "./TaskClass.js";
 const taskListElement = document.querySelector("#taskList");
 const inputElement = document.querySelector("#taskInput");
-const addButton = document.querySelector("#addTaskButton");
-/* Cria um array chamado listaTarefas que armazene vários objetos do tipo Tarefa.
-Dica lógica passo a passo:
-1. Declare o array com o tipo explícito: Tarefa[].
-2. Adicione 2 ou 3 tarefas de exemplo manualmente.
-3. Percorra o array e mostre apenas os títulos numa div ou ul.*/
-const taskList = [
-    { id: 1, title: "Estudar TypeScript", completed: false },
-    { id: 2, title: "Fazer exercícios", completed: true },
-    { id: 3, title: "Ler documentação", completed: false },
-];
+const addButton = document.querySelector("#addTaskBtn");
+const sortButton = document.querySelector("#sortTaskBtn");
+const categorySelect = document.querySelector("#taskCategory");
+const taskList = [];
 export function createElementLI(texto) {
     const li = document.createElement("li");
     li.textContent = texto;
@@ -20,13 +12,21 @@ export function createElementLI(texto) {
 }
 export default function Exercicio_01() {
     taskList.forEach((task) => {
-        const li = createElementLI(`${task.id} - ${task.title} - ${task.completed}`);
+        var _a;
+        let result = "";
+        if (task.completed) {
+            result = `${task.title} (Concluída em: ${(_a = task.completeDate) === null || _a === void 0 ? void 0 : _a.toLocaleDateString()})`;
+        }
+        else {
+            result = `${task.id} - ${task.title} - ${task.category}`;
+        }
+        const li = createElementLI(result);
         taskListElement.appendChild(li);
-        /*Exercício 7 — Remover tarefa */
+        /* Remover tarefa */
         const buttonRemover = document.createElement("button");
         buttonRemover.textContent = "Remover";
         taskListElement.appendChild(buttonRemover);
-        buttonRemover.addEventListener("click", (id) => {
+        buttonRemover.addEventListener("click", () => {
             const index = taskList.findIndex((t) => t.id === task.id);
             if (index !== -1) {
                 taskList.splice(index, 1);
@@ -36,16 +36,24 @@ export default function Exercicio_01() {
         });
     });
 }
-/* Exercício 4 — Adicionar tarefa via input */
+/*  Adicionar tarefa via input */
 addButton.addEventListener("click", () => {
-    const task = inputElement.value;
-    if (task) {
-        const newTask = new TaskClass(Date.now(), task);
+    const title = inputElement.value.trim();
+    const category = categorySelect.value;
+    if (title && category) {
+        const newTask = new TaskClass(Date.now(), title, category);
+        //newTask.markCompleted();
         taskList.push(newTask);
         inputElement.value = "";
         updateTaskList();
         styleTasks();
     }
+});
+/*  Ordenação Alfabética */
+sortButton.addEventListener("click", () => {
+    taskList.sort((a, b) => a.title.localeCompare(b.title));
+    updateTaskList();
+    styleTasks();
 });
 /* Exercício 5 — Renderização dinâmica */
 export function updateTaskList() {
