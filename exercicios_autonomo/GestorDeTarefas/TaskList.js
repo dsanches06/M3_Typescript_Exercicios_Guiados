@@ -4,6 +4,13 @@ const inputElement = document.querySelector("#taskInput");
 const addButton = document.querySelector("#addTaskBtn");
 const sortButton = document.querySelector("#sortTaskBtn");
 const categorySelect = document.querySelector("#taskCategory");
+const contadorElement = document.querySelector("#contador");
+/* Contador de tarefas */
+function updateTaskCounter() {
+    const totalTasks = taskList.length;
+    const completedTasks = taskList.filter((task) => task.completed).length;
+    contadorElement.textContent = `Tarefas: ${totalTasks} | Concluídas: ${completedTasks}`;
+}
 const taskList = [];
 export function createElementLI(texto) {
     const li = document.createElement("li");
@@ -11,6 +18,7 @@ export function createElementLI(texto) {
     return li;
 }
 export default function Exercicio_01() {
+    updateTaskCounter();
     taskList.forEach((task) => {
         var _a;
         let result = "";
@@ -34,6 +42,21 @@ export default function Exercicio_01() {
                 styleTasks();
             }
         });
+        /* Editar título */
+        const buttonEditar = document.createElement("button");
+        buttonEditar.textContent = "Editar";
+        taskListElement.appendChild(buttonEditar);
+        buttonEditar.addEventListener("click", () => {
+            const index = taskList.findIndex((t) => t.id === task.id);
+            if (index !== -1) {
+                const newTitle = prompt("Digite o novo título da tarefa:", task.title);
+                if (newTitle !== null && newTitle.trim() !== "") {
+                    taskList[index].title = newTitle.trim();
+                    updateTaskList();
+                    styleTasks();
+                }
+            }
+        });
     });
 }
 /*  Adicionar tarefa via input */
@@ -55,12 +78,12 @@ sortButton.addEventListener("click", () => {
     updateTaskList();
     styleTasks();
 });
-/* Exercício 5 — Renderização dinâmica */
+/* Renderização dinâmica */
 export function updateTaskList() {
     taskListElement.innerHTML = "";
     Exercicio_01();
 }
-/*  Exercício 6 — Estilização por estado */
+/* Estilização por estado */
 export function styleTasks() {
     const listItems = taskListElement.querySelectorAll("li");
     listItems.forEach((li, index) => {

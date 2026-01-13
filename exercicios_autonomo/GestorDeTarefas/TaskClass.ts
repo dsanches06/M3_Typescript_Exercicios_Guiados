@@ -1,4 +1,4 @@
-import ITask from "./ITask";
+import ITask from "./ITask.js";
 import Category from "./Category.js";
 
 export default class TaskClass implements ITask {

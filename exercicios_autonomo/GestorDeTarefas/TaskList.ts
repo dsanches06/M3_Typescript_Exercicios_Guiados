@@ -9,6 +9,16 @@ const sortButton = document.querySelector("#sortTaskBtn") as HTMLButtonElement;
 const categorySelect = document.querySelector(
   "#taskCategory"
 ) as HTMLSelectElement;
+const contadorElement = document.querySelector(
+  "#contador"
+) as HTMLDivElement;
+
+/* Contador de tarefas */
+function updateTaskCounter(): void {
+  const totalTasks = taskList.length;
+  const completedTasks = taskList.filter((task) => task.completed).length;
+  contadorElement.textContent = `Tarefas: ${totalTasks} | Concluídas: ${completedTasks}`;
+}
 
 const taskList: Task[] = [];
 
@@ -19,6 +29,8 @@ export function createElementLI(texto: string): HTMLLIElement {
 }
 
 export default function Exercicio_01(): void {
+  updateTaskCounter();
+
   taskList.forEach((task) => {
     let result: string = "";
     if (task.completed) {
@@ -33,7 +45,7 @@ export default function Exercicio_01(): void {
     taskListElement.appendChild(li);
 
     /* Remover tarefa */
-    const buttonRemover = document.createElement("button");
+    const buttonRemover = document.createElement("button") as HTMLButtonElement;
     buttonRemover.textContent = "Remover";
     taskListElement.appendChild(buttonRemover);
     buttonRemover.addEventListener("click", () => {
@@ -42,6 +54,22 @@ export default function Exercicio_01(): void {
         taskList.splice(index, 1);
         updateTaskList();
         styleTasks();
+      }
+    });
+
+    /* Editar título */
+    const buttonEditar = document.createElement("button") as HTMLButtonElement;
+    buttonEditar.textContent = "Editar";
+    taskListElement.appendChild(buttonEditar);
+    buttonEditar.addEventListener("click", () => {
+      const index = taskList.findIndex((t) => t.id === task.id);
+      if (index !== -1) {
+        const newTitle = prompt("Digite o novo título da tarefa:", task.title);
+        if (newTitle !== null && newTitle.trim() !== "") {
+          taskList[index].title = newTitle.trim();
+          updateTaskList();
+          styleTasks();
+        }
       }
     });
   });
@@ -69,13 +97,13 @@ sortButton.addEventListener("click", () => {
   styleTasks();
 });
 
-/* Exercício 5 — Renderização dinâmica */
+/* Renderização dinâmica */
 export function updateTaskList(): void {
   taskListElement.innerHTML = "";
   Exercicio_01();
 }
 
-/*  Exercício 6 — Estilização por estado */
+/* Estilização por estado */
 export function styleTasks(): void {
   const listItems = taskListElement.querySelectorAll("li");
   listItems.forEach((li, index) => {

@@ -1,2 +1,2 @@
-import Exercicio_01 from "./Gestor de Tarefas/TaskList.js";
+import Exercicio_01 from "./GestorDeTarefas/TaskList.js";
 Exercicio_01();
