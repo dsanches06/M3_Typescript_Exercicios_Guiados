@@ -1,63 +1,16 @@
+import { updateTaskList, styleTasks, showTaskCounter } from "./Components.js";
 import TaskClass from "./TaskClass.js";
-const taskListElement = document.querySelector("#taskList");
 const inputElement = document.querySelector("#taskInput");
 const addButton = document.querySelector("#addTaskBtn");
 const sortButton = document.querySelector("#sortTaskBtn");
 const categorySelect = document.querySelector("#taskCategory");
-const contadorElement = document.querySelector("#contador");
-/* Contador de tarefas */
-function updateTaskCounter() {
-    const totalTasks = taskList.length;
-    const completedTasks = taskList.filter((task) => task.completed).length;
-    contadorElement.textContent = `Tarefas: ${totalTasks} | Concluídas: ${completedTasks}`;
-}
+const completedTaskBtn = document.querySelector("#completedTaskBtn");
 const taskList = [];
-export function createElementLI(texto) {
-    const li = document.createElement("li");
-    li.textContent = texto;
-    return li;
-}
-export default function Exercicio_01() {
-    updateTaskCounter();
-    taskList.forEach((task) => {
-        var _a;
-        let result = "";
-        if (task.completed) {
-            result = `${task.title} (Concluída em: ${(_a = task.completeDate) === null || _a === void 0 ? void 0 : _a.toLocaleDateString()})`;
-        }
-        else {
-            result = `${task.id} - ${task.title} - ${task.category}`;
-        }
-        const li = createElementLI(result);
-        taskListElement.appendChild(li);
-        /* Remover tarefa */
-        const buttonRemover = document.createElement("button");
-        buttonRemover.textContent = "Remover";
-        taskListElement.appendChild(buttonRemover);
-        buttonRemover.addEventListener("click", () => {
-            const index = taskList.findIndex((t) => t.id === task.id);
-            if (index !== -1) {
-                taskList.splice(index, 1);
-                updateTaskList();
-                styleTasks();
-            }
-        });
-        /* Editar título */
-        const buttonEditar = document.createElement("button");
-        buttonEditar.textContent = "Editar";
-        taskListElement.appendChild(buttonEditar);
-        buttonEditar.addEventListener("click", () => {
-            const index = taskList.findIndex((t) => t.id === task.id);
-            if (index !== -1) {
-                const newTitle = prompt("Digite o novo título da tarefa:", task.title);
-                if (newTitle !== null && newTitle.trim() !== "") {
-                    taskList[index].title = newTitle.trim();
-                    updateTaskList();
-                    styleTasks();
-                }
-            }
-        });
-    });
+/*  Função Principal para Mostrar Tarefas */
+export default function showTasks() {
+    showTaskCounter(taskList);
+    updateTaskList(taskList);
+    styleTasks(taskList);
 }
 /*  Adicionar tarefa via input */
 addButton.addEventListener("click", () => {
@@ -65,35 +18,31 @@ addButton.addEventListener("click", () => {
     const category = categorySelect.value;
     if (title && category) {
         const newTask = new TaskClass(Date.now(), title, category);
-        //newTask.markCompleted();
         taskList.push(newTask);
         inputElement.value = "";
-        updateTaskList();
-        styleTasks();
+        showTasks();
     }
 });
 /*  Ordenação Alfabética */
 sortButton.addEventListener("click", () => {
     taskList.sort((a, b) => a.title.localeCompare(b.title));
-    updateTaskList();
-    styleTasks();
+    showTasks();
 });
-/* Renderização dinâmica */
-export function updateTaskList() {
-    taskListElement.innerHTML = "";
-    Exercicio_01();
-}
-/* Estilização por estado */
-export function styleTasks() {
-    const listItems = taskListElement.querySelectorAll("li");
-    listItems.forEach((li, index) => {
-        if (taskList[index].completed) {
-            li.style.textDecoration = "line-through";
-            li.style.color = "gray";
+/* Limpar Todas as Concluídas */
+completedTaskBtn.style.backgroundColor = "red";
+completedTaskBtn.addEventListener("click", () => {
+    for (let i = taskList.length - 1; i >= 0; i--) {
+        if (taskList[i].completed) {
+            taskList.splice(i, 1);
         }
-        else {
-            li.style.textDecoration = "none";
-            li.style.color = "black";
-        }
-    });
-}
+    }
+    showTasks();
+});
+/* Pesquisa Dinâmica */
+const searchInput = document.querySelector("#searchInput");
+searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredTasks = taskList.filter((task) => task.title.toLowerCase().includes(searchTerm));
+    updateTaskList(filteredTasks);
+    styleTasks(filteredTasks);
+});

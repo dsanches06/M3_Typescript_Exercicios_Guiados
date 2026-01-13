@@ -1,3 +1,3 @@
-type Category = 'Trabalho' | 'Pessoal' | 'Estudo';
+type Category = 'Work' | 'Personal' | 'Study';
 
 export default Category;

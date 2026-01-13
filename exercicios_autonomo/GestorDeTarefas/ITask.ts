@@ -1,4 +1,4 @@
-import Category from "./Category";
+import Category from "./Category.js";
 
 export default interface ITask {
   id: number;
@@ -6,4 +6,5 @@ export default interface ITask {
   completed: boolean;
   completeDate?: Date;
   category: Category;
+  markCompleted(): void;
 }

@@ -1,4 +1,4 @@
-import Category from "./Category";
+import Category from "./Category.js";
 
 export default interface ITask {
   id: number;

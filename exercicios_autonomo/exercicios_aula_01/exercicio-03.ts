@@ -1,4 +1,4 @@
-import exercicio_01 from "./exercicio-01";
+import exercicio_01 from "./exercicio-01.js";
 
 /* Exercício 3 — Limpar campo de texto */
 //1. Cria uma função que recebe um input.
