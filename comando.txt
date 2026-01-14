@@ -4,4 +4,4 @@
   tsc main.ts
 
 
-  feat: Exercicios de Laboratorio 2_2 - Procurar utilizador por nome
+  feat: Exercicios de Laboratorio 2_2 - Contador de utilizadores ativos e inativos

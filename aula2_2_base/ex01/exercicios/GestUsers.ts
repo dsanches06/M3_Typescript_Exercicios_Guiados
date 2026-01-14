@@ -58,13 +58,18 @@ filterActiveBtn.addEventListener("click", () => {
 });
 
 /* Procurar utilizador por nome */
-const searchUserInput = document.querySelector(
-  "#searchUser"
-) as HTMLInputElement;
-searchUserInput.addEventListener("input", () => {
-  const name = searchUserInput.value.toLowerCase();
+const searchUser = document.querySelector("#searchUser") as HTMLInputElement;
+searchUser.addEventListener("input", () => {
+  //obter o nome inserido no input em minusculas
+  const name = searchUser.value.toLowerCase();
+  //filtrar a lista de utilizadores pelo nome
   const filteredUsers = usersList.filter((user) =>
     user.name.toLowerCase().includes(name)
   );
+  //mostrar os utilizadores filtrados
   showUsers(filteredUsers as UserClass[]);
 });
+
+
+
+

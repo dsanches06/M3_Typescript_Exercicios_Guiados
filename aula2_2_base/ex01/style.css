@@ -228,3 +228,19 @@ button[type="submit"]:active {
 .remove-btn:hover {
   background-color: #c82333;
 }
+
+.user-counters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #333;
+}
+#TotalUsers,
+#ActiveUsers,
+#InactiveUsers {
+  font-weight: bold;
+  font-size: 14px;
+}

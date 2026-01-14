@@ -9,13 +9,8 @@ const usersContainer = document.querySelector(
 export function showUsers(usersList: UserClass[]): void {
   renderUsers(usersList as UserClass[]);
   countUsers(usersList);
-}
-/* Contador de utilizadores */
-function countUsers(usersList: UserClass[]): void {
-  const totalUsers = document.querySelector("#TotalUsers") as HTMLDivElement;
-  totalUsers.style.fontWeight = "bold";
-  totalUsers.style.fontSize = "18px";
-  totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+  countActiveUsers(usersList);
+  countInactiveUsers(usersList);
 }
 
 /* Criar cartão de utilizador */
@@ -82,10 +77,14 @@ export function renderUsers(userList: UserClass[]) {
 
 /* Desativar utilizador */
 function desactivedUser(userID: number, userList: UserClass[]) {
+  //encontra o utilizador pelo ID
   const user = userList.find((user) => user.id === userID);
+  //se o utilizador for encontrado
   if (user) {
+    //desativa o utilizador
     user.desativar();
-    renderUsers(userList);
+    //atualiza a exibição dos utilizadores
+    showUsers(userList);
   }
 }
 
@@ -93,7 +92,7 @@ function desactivedUser(userID: number, userList: UserClass[]) {
 function removeUserByID(userID: number, userList: UserClass[]): UserClass[] {
   // Usa filter() para criar um novo array sem o utilizador com o ID especificado
   const updatedUserList = userList.filter((user) => user.id !== userID);
-  //
+  //retorna a lista atualizada
   return updatedUserList as UserClass[];
 }
 
@@ -165,3 +164,26 @@ export function addNewUser(id: number): UserClass {
   return new UserClass(id, name, email);
 }
 
+/* Contador de utilizadores ativos */
+function countActiveUsers(usersList: UserClass[]): void {
+  const activeUsers = usersList.filter((user) => user.isAtive);
+  const activeUsersElement = document.querySelector(
+    "#ActiveUsers"
+  ) as HTMLDivElement;
+  activeUsersElement.textContent = `Utilizadores Ativos: ${activeUsers.length}`;
+}
+
+/* Contador de utilizadores inativos */
+function countInactiveUsers(usersList: UserClass[]): void {
+  const inactiveUsers = usersList.filter((user) => !user.isAtive);
+  const inactiveUsersElement = document.querySelector(
+    "#InactiveUsers"
+  ) as HTMLDivElement;
+  inactiveUsersElement.textContent = `Utilizadores Inativos: ${inactiveUsers.length}`;
+}
+
+/* Contador de utilizadores */
+function countUsers(usersList: UserClass[]): void {
+  const totalUsers = document.querySelector("#TotalUsers") as HTMLDivElement;
+  totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+}

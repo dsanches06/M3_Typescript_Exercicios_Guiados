@@ -5,13 +5,8 @@ const usersContainer = document.querySelector("#usersContainer");
 export function showUsers(usersList) {
     renderUsers(usersList);
     countUsers(usersList);
-}
-/* Contador de utilizadores */
-function countUsers(usersList) {
-    const totalUsers = document.querySelector("#TotalUsers");
-    totalUsers.style.fontWeight = "bold";
-    totalUsers.style.fontSize = "18px";
-    totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+    countActiveUsers(usersList);
+    countInactiveUsers(usersList);
 }
 /* Criar cartão de utilizador */
 function createUserCard(user, userList) {
@@ -63,17 +58,21 @@ export function renderUsers(userList) {
 }
 /* Desativar utilizador */
 function desactivedUser(userID, userList) {
+    //encontra o utilizador pelo ID
     const user = userList.find((user) => user.id === userID);
+    //se o utilizador for encontrado
     if (user) {
+        //desativa o utilizador
         user.desativar();
-        renderUsers(userList);
+        //atualiza a exibição dos utilizadores
+        showUsers(userList);
     }
 }
 /* Remover utilizador */
 function removeUserByID(userID, userList) {
     // Usa filter() para criar um novo array sem o utilizador com o ID especificado
     const updatedUserList = userList.filter((user) => user.id !== userID);
-    //
+    //retorna a lista atualizada
     return updatedUserList;
 }
 /* Modal para visualização de detalhes do utilizador */
@@ -130,4 +129,21 @@ export function addNewUser(id) {
     emailInput.value = "";
     //retorna um novo objeto do tipo UserClass
     return new UserClass(id, name, email);
+}
+/* Contador de utilizadores ativos */
+function countActiveUsers(usersList) {
+    const activeUsers = usersList.filter((user) => user.isAtive);
+    const activeUsersElement = document.querySelector("#ActiveUsers");
+    activeUsersElement.textContent = `Utilizadores Ativos: ${activeUsers.length}`;
+}
+/* Contador de utilizadores inativos */
+function countInactiveUsers(usersList) {
+    const inactiveUsers = usersList.filter((user) => !user.isAtive);
+    const inactiveUsersElement = document.querySelector("#InactiveUsers");
+    inactiveUsersElement.textContent = `Utilizadores Inativos: ${inactiveUsers.length}`;
+}
+/* Contador de utilizadores */
+function countUsers(usersList) {
+    const totalUsers = document.querySelector("#TotalUsers");
+    totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
 }
