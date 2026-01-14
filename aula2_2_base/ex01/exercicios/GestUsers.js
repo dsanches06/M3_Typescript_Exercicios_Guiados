@@ -1,5 +1,5 @@
 /* Array de utilizadores */
-import { renderUsers, openFormModal, addNewUser } from "./Components.js";
+import { showUsers, openFormModal, addNewUser } from "./Components.js";
 import { UserClass } from "./UserClass.js";
 const usersList = [
     new UserClass(1, "Alice Morais", "alice@example.com"),
@@ -8,11 +8,6 @@ const usersList = [
 /* Função principal de gestão de utilizadores */
 export default function GestUsers() {
     showUsers(usersList);
-}
-/* Mostrar utilizadores */
-function showUsers(usersList) {
-    renderUsers(usersList);
-    countUsers();
 }
 /* Obter o último ID de utilizador */
 function getLastUserId() {
@@ -52,10 +47,3 @@ filterActiveBtn.addEventListener("click", () => {
     const activeUsers = usersList.filter((user) => user.isAtive);
     showUsers(activeUsers);
 });
-/* Contador de utilizadores */
-function countUsers() {
-    const totalUsers = document.querySelector("#TotalUsers");
-    totalUsers.style.fontWeight = "bold";
-    totalUsers.style.fontSize = "18px";
-    totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
-}

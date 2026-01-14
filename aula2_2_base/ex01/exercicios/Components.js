@@ -1,6 +1,18 @@
 /*  Estrutura HTML (cartões) */
 import { UserClass } from "./UserClass.js";
 const usersContainer = document.querySelector("#usersContainer");
+/* Mostrar utilizadores */
+export function showUsers(usersList) {
+    renderUsers(usersList);
+    countUsers(usersList);
+}
+/* Contador de utilizadores */
+function countUsers(usersList) {
+    const totalUsers = document.querySelector("#TotalUsers");
+    totalUsers.style.fontWeight = "bold";
+    totalUsers.style.fontSize = "18px";
+    totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+}
 /* Criar cartão de utilizador */
 function createUserCard(user, userList) {
     const divUserCard = document.createElement("div");
@@ -21,10 +33,24 @@ function createUserCard(user, userList) {
     divCardTasks.className = "tasks";
     divCardTasks.textContent = "0 tarefas atribuídas";
     divUserCard.appendChild(divCardTasks);
+    const divGroupBtn = document.createElement("div");
+    divGroupBtn.className = "form-group";
+    divUserCard.appendChild(divGroupBtn);
     const bntDesativar = document.createElement("button");
     bntDesativar.textContent = "Desativar Utilizador";
     bntDesativar.addEventListener("click", desactivedUser.bind(null, user.id, userList));
-    divUserCard.appendChild(bntDesativar);
+    divGroupBtn.appendChild(bntDesativar);
+    const btnRemover = document.createElement("button");
+    btnRemover.textContent = "Remover";
+    btnRemover.className = "remove-btn";
+    btnRemover.addEventListener("click", () => {
+        const updatedUserList = removeUserByID(user.id, userList);
+        if (updatedUserList) {
+            //atualiza a lista de utilizadores
+            showUsers(updatedUserList);
+        }
+    });
+    divGroupBtn.appendChild(btnRemover);
     usersContainer.appendChild(divUserCard);
 }
 /* Função de renderização */
@@ -42,6 +68,13 @@ function desactivedUser(userID, userList) {
         user.desativar();
         renderUsers(userList);
     }
+}
+/* Remover utilizador */
+function removeUserByID(userID, userList) {
+    // Usa filter() para criar um novo array sem o utilizador com o ID especificado
+    const updatedUserList = userList.filter((user) => user.id !== userID);
+    //
+    return updatedUserList;
 }
 /* Modal para visualização de detalhes do utilizador */
 function showUserDetails(user) {

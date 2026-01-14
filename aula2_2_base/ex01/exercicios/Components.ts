@@ -1,10 +1,22 @@
 /*  Estrutura HTML (cartões) */
-
 import { UserClass } from "./UserClass.js";
 
 const usersContainer = document.querySelector(
   "#usersContainer"
 ) as HTMLDivElement;
+
+/* Mostrar utilizadores */
+export function showUsers(usersList: UserClass[]): void {
+  renderUsers(usersList as UserClass[]);
+  countUsers(usersList);
+}
+/* Contador de utilizadores */
+function countUsers(usersList: UserClass[]): void {
+  const totalUsers = document.querySelector("#TotalUsers") as HTMLDivElement;
+  totalUsers.style.fontWeight = "bold";
+  totalUsers.style.fontSize = "18px";
+  totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+}
 
 /* Criar cartão de utilizador */
 function createUserCard(user: UserClass, userList: UserClass[]): void {
@@ -31,13 +43,29 @@ function createUserCard(user: UserClass, userList: UserClass[]): void {
   divCardTasks.textContent = "0 tarefas atribuídas";
   divUserCard.appendChild(divCardTasks);
 
-  const bntDesativar= document.createElement("button") as HTMLButtonElement;
+  const divGroupBtn = document.createElement("div") as HTMLDivElement;
+  divGroupBtn.className = "form-group";
+  divUserCard.appendChild(divGroupBtn);
+
+  const bntDesativar = document.createElement("button") as HTMLButtonElement;
   bntDesativar.textContent = "Desativar Utilizador";
   bntDesativar.addEventListener(
     "click",
     desactivedUser.bind(null, user.id, userList)
   );
-  divUserCard.appendChild(bntDesativar);
+  divGroupBtn.appendChild(bntDesativar);
+
+  const btnRemover = document.createElement("button") as HTMLButtonElement;
+  btnRemover.textContent = "Remover";
+  btnRemover.className = "remove-btn";
+  btnRemover.addEventListener("click", () => {
+    const updatedUserList = removeUserByID(user.id, userList);
+    if (updatedUserList) {
+      //atualiza a lista de utilizadores
+      showUsers(updatedUserList);
+    }
+  });
+  divGroupBtn.appendChild(btnRemover);
 
   usersContainer.appendChild(divUserCard);
 }
@@ -59,6 +87,14 @@ function desactivedUser(userID: number, userList: UserClass[]) {
     user.desativar();
     renderUsers(userList);
   }
+}
+
+/* Remover utilizador */
+function removeUserByID(userID: number, userList: UserClass[]): UserClass[] {
+  // Usa filter() para criar um novo array sem o utilizador com o ID especificado
+  const updatedUserList = userList.filter((user) => user.id !== userID);
+  //
+  return updatedUserList as UserClass[];
 }
 
 /* Modal para visualização de detalhes do utilizador */

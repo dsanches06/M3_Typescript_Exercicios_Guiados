@@ -116,6 +116,7 @@ input[type="button"]:hover {
 
 .form-group {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 12px;
 }
@@ -219,4 +220,11 @@ button[type="submit"]:active {
 #searchUser {
   width: 520px;
   margin-bottom: 10px;
+}
+
+.remove-btn {
+  background-color: #dc3545;
+}
+.remove-btn:hover {
+  background-color: #c82333;
 }
