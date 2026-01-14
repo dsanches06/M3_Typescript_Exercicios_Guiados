@@ -175,11 +175,17 @@ button[type="submit"] {
   letter-spacing: 0.5px;
 }
 
+button:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
 button[type="submit"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
 }
 
+button:active,
+input[type="text"]:active,
+input[type="email"]:active,
 button[type="submit"]:active {
   transform: translateY(0);
 }
@@ -215,7 +221,6 @@ button[type="submit"]:active {
 .userCardBtn {
   display: flex;
   flex-direction: column;
-
   gap: 8px;
 }
 

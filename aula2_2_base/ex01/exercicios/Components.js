@@ -13,7 +13,7 @@ export function showUsers(usersList) {
 function createUserCard(user, userList) {
     const divUserCard = document.createElement("div");
     divUserCard.className = "userCard";
-    divUserCard.addEventListener("click", showUserDetails.bind(null, user));
+    divUserCard.addEventListener("click", () => showUserDetails(user));
     //para mostrar dados de utilizador
     const divUserCardContent = document.createElement("div");
     divUserCardContent.className = "userCardContent";
