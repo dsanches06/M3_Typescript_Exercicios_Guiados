@@ -29,6 +29,33 @@ const formUser = document.querySelector("#formUser");
 formUser.addEventListener("submit", (event) => {
     // Prevent form submissio
     event.preventDefault();
+    // Obter valores dos inputs
+    const nameInput = document.querySelector("#nameInput");
+    const emailInput = document.querySelector("#emailInput");
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    // Obter elemento do banner de erro
+    const errorBanner = document.querySelector("#errorBanner");
+    // Limpar mensagens de erro anteriores
+    errorBanner.textContent = "";
+    errorBanner.style.display = "none";
+    // Validações
+    let isValid = true;
+    let errorMessages = [];
+    if (name === "") {
+        errorMessages.push("O nome não pode estar vazio.");
+        isValid = false;
+    }
+    if (!email.includes("@")) {
+        errorMessages.push("O email deve conter '@'.");
+        isValid = false;
+    }
+    // Se não válido, mostrar banner de erro
+    if (!isValid) {
+        errorBanner.textContent = errorMessages.join(" ");
+        errorBanner.style.display = "block";
+        return;
+    }
     //obter um novo id a partir do ultimo
     let newId = getLastUserId() + 1;
     //cria um novo user com os dados inseridos no formulario

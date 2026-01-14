@@ -244,3 +244,20 @@ button[type="submit"]:active {
   font-weight: bold;
   font-size: 14px;
 }
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.error-banner {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+  display: none;
+  font-size: 14px;
+}
