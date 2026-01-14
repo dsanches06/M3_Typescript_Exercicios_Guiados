@@ -4,4 +4,4 @@
   tsc main.ts
 
 
-  feat: Exercicios de Laboratorio 2_2 - Alternar estado (ativo / inativo)
+  feat: Exercicios de Laboratorio 2_2 - Ordenar utilizadores por nome

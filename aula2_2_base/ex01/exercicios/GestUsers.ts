@@ -70,6 +70,13 @@ searchUser.addEventListener("input", () => {
   showUsers(filteredUsers as UserClass[]);
 });
 
-
-
-
+/* Ordenar utilizadores por nome */
+const sortUsersBtn = document.querySelector(
+  "#sortUsersBtn"
+) as HTMLButtonElement;
+sortUsersBtn.addEventListener("click", () => {
+  const sortedUsers = [...usersList].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+  showUsers(sortedUsers as UserClass[]);
+});
