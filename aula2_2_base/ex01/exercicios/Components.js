@@ -31,10 +31,10 @@ function createUserCard(user, userList) {
     const divGroupBtn = document.createElement("div");
     divGroupBtn.className = "form-group";
     divUserCard.appendChild(divGroupBtn);
-    const bntDesativar = document.createElement("button");
-    bntDesativar.textContent = "Desativar Utilizador";
-    bntDesativar.addEventListener("click", desactivedUser.bind(null, user.id, userList));
-    divGroupBtn.appendChild(bntDesativar);
+    const bntToggle = document.createElement("button");
+    bntToggle.textContent = user.isAtive ? "Desativar Utilizador" : "Ativar Utilizador";
+    bntToggle.addEventListener("click", toggleUserState.bind(null, user.id, userList));
+    divGroupBtn.appendChild(bntToggle);
     const btnRemover = document.createElement("button");
     btnRemover.textContent = "Remover";
     btnRemover.className = "remove-btn";
@@ -146,4 +146,12 @@ function countInactiveUsers(usersList) {
 function countUsers(usersList) {
     const totalUsers = document.querySelector("#TotalUsers");
     totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+}
+/* Alternar estado (ativo / inativo) */
+function toggleUserState(userID, userList) {
+    const user = userList.find((user) => user.id === userID);
+    if (user) {
+        user.toggleEstado();
+        showUsers(userList);
+    }
 }

@@ -8,4 +8,7 @@ export class UserClass {
     desativar() {
         this.isAtive = false;
     }
+    toggleEstado() {
+        this.isAtive = !this.isAtive;
+    }
 }

@@ -42,13 +42,13 @@ function createUserCard(user: UserClass, userList: UserClass[]): void {
   divGroupBtn.className = "form-group";
   divUserCard.appendChild(divGroupBtn);
 
-  const bntDesativar = document.createElement("button") as HTMLButtonElement;
-  bntDesativar.textContent = "Desativar Utilizador";
-  bntDesativar.addEventListener(
+  const bntToggle = document.createElement("button") as HTMLButtonElement;
+  bntToggle.textContent = user.isAtive ? "Desativar Utilizador" : "Ativar Utilizador";
+  bntToggle.addEventListener(
     "click",
-    desactivedUser.bind(null, user.id, userList)
+    toggleUserState.bind(null, user.id, userList)
   );
-  divGroupBtn.appendChild(bntDesativar);
+  divGroupBtn.appendChild(bntToggle);
 
   const btnRemover = document.createElement("button") as HTMLButtonElement;
   btnRemover.textContent = "Remover";
@@ -186,4 +186,13 @@ function countInactiveUsers(usersList: UserClass[]): void {
 function countUsers(usersList: UserClass[]): void {
   const totalUsers = document.querySelector("#TotalUsers") as HTMLDivElement;
   totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+}
+
+/* Alternar estado (ativo / inativo) */
+function toggleUserState(userID: number, userList: UserClass[]): void {
+  const user = userList.find((user) => user.id === userID);
+  if (user) {
+    user.toggleEstado();
+    showUsers(userList);
+  }
 }

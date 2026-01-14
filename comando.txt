@@ -4,4 +4,4 @@
   tsc main.ts
 
 
-  feat: Exercicios de Laboratorio 2_2 - Contador de utilizadores ativos e inativos
+  feat: Exercicios de Laboratorio 2_2 - Alternar estado (ativo / inativo)

@@ -17,4 +17,8 @@ export class UserClass implements IUser {
   desativar(): void {
     this.isAtive = false;
   }
+
+  toggleEstado(): void {
+    this.isAtive = !this.isAtive;
+  }
 }
