@@ -5,9 +5,16 @@ const usersList = [
     new UserClass(1, "Alice Morais", "alice@example.com"),
     new UserClass(2, "Bob Silva", "bob@example.com"),
 ];
-export default function showUsers() {
-    renderUsers(usersList);
+/* Função principal de gestão de utilizadores */
+export default function GestUsers() {
+    showUsers(usersList);
 }
+/* Mostrar utilizadores */
+function showUsers(usersList) {
+    renderUsers(usersList);
+    countUsers();
+}
+/* Obter o último ID de utilizador */
 function getLastUserId() {
     //
     let lastUserID = 0;
@@ -37,11 +44,16 @@ formUser.addEventListener("submit", (event) => {
     const modalForm = document.querySelector("#modalForm");
     modalForm.style.display = "none";
     //mostra todos os utilizadores
-    showUsers();
+    showUsers(usersList);
 });
 /* Filtrar utilizadores ativos */
 const filterActiveBtn = document.querySelector("#activeUsersBtn");
 filterActiveBtn.addEventListener("click", () => {
     const activeUsers = usersList.filter((user) => user.isAtive);
-    renderUsers(activeUsers);
+    showUsers(activeUsers);
 });
+/* Contador de utilizadores */
+function countUsers() {
+    const totalUsers = document.querySelector("#TotalUsers");
+    totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+}

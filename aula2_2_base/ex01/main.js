@@ -1,2 +1,2 @@
-import showUsers from "./exercicios/GestUsers.js";
-showUsers();
+import GestUsers from "./exercicios/GestUsers.js";
+GestUsers();

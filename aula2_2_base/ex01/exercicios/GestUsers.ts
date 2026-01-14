@@ -8,10 +8,18 @@ const usersList: IUser[] = [
   new UserClass(2, "Bob Silva", "bob@example.com"),
 ];
 
-export default function showUsers(): void {
-  renderUsers(usersList as UserClass[]);
+/* Função principal de gestão de utilizadores */
+export default function GestUsers(): void {
+  showUsers(usersList as UserClass[]);
 }
 
+/* Mostrar utilizadores */
+function showUsers(usersList: UserClass[]): void {
+  renderUsers(usersList as UserClass[]);
+  countUsers();
+}
+
+/* Obter o último ID de utilizador */
 function getLastUserId(): number {
   //
   let lastUserID: number = 0;
@@ -43,7 +51,7 @@ formUser.addEventListener("submit", (event: Event) => {
   const modalForm = document.querySelector("#modalForm") as HTMLDivElement;
   modalForm.style.display = "none";
   //mostra todos os utilizadores
-  showUsers();
+  showUsers(usersList as UserClass[]);
 });
 
 /* Filtrar utilizadores ativos */
@@ -52,5 +60,11 @@ const filterActiveBtn = document.querySelector(
 ) as HTMLButtonElement;
 filterActiveBtn.addEventListener("click", () => {
   const activeUsers = usersList.filter((user) => user.isAtive);
-  renderUsers(activeUsers as UserClass[]);
+  showUsers(activeUsers as UserClass[]);
 });
+
+/* Contador de utilizadores */
+function countUsers(): void {
+  const totalUsers = document.querySelector("#TotalUsers") as HTMLDivElement;
+  totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+}
