@@ -4,24 +4,11 @@
   tsc main.ts
 
 
-  feat: Exercicios de Laboratorio 2_2 - Estatísticas simples
+  feat: Exercicios de Laboratorio 2_2 - Simular dados iniciais
 
 
-
-  /* Alternar estado (ativo / inativo) */
-function toggleUserState(
-  userID: number,
-  userList: UserClass[],
+//recebe o evento na função
   event: Event
-): void {
   //impede a propagação do evento de clique
   event.stopPropagation();
-  //encontra o utilizador pelo ID
-  const user = userList.find((user) => user.id === userID);
-  //se o utilizador for encontrado
-  if (user) {
-    //alternar o estado do utilizador
-    user.toggleEstado();
-    //atualiza a exibição dos utilizadores
-    showUsers(userList);
-  }
+  

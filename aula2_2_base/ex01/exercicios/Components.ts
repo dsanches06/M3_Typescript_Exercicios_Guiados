@@ -7,7 +7,7 @@ const usersContainer = document.querySelector(
 
 /* Mostrar utilizadores */
 export function showUsers(usersList: UserClass[]): void {
-  renderUsers(usersList as UserClass[]);
+  renderUsers(usersList);
   countUsers(usersList);
   countActiveUsers(usersList);
   countInactiveUsers(usersList);
@@ -18,53 +18,60 @@ export function showUsers(usersList: UserClass[]): void {
 function createUserCard(user: UserClass, userList: UserClass[]): void {
   const divUserCard = document.createElement("div") as HTMLDivElement;
   divUserCard.className = "userCard";
-  divUserCard.addEventListener("click", showUserDetails.bind(null, user));
+  divUserCard.addEventListener("click", () => showUserDetails(user));
+
+  //para mostrar dados de utilizador
+  const divUserCardContent = document.createElement("div") as HTMLDivElement;
+  divUserCardContent.className = "userCardContent";
+  divUserCard.appendChild(divUserCardContent);
+
+  const divCardId = document.createElement("div") as HTMLDivElement;
+  divCardId.textContent = `ID do Utilizador: ${user.id}`;
+  divUserCardContent.appendChild(divCardId);
 
   const divCardName = document.createElement("div") as HTMLDivElement;
   divCardName.textContent = `${user.name}`;
-  divUserCard.appendChild(divCardName);
+  divUserCardContent.appendChild(divCardName);
 
   const divCardEmail = document.createElement("div") as HTMLDivElement;
   divCardEmail.textContent = `${user.email}`;
-  divUserCard.appendChild(divCardEmail);
+  divUserCardContent.appendChild(divCardEmail);
 
   const divCardStatus = document.createElement("div") as HTMLDivElement;
   divCardStatus.textContent = `${user.isAtive ? "ativo" : "Inativo"}`;
+
   //Mostra o estado com texto ou cor diferente
   divCardStatus.style.color = user.isAtive ? "green" : "red";
-  divUserCard.appendChild(divCardStatus);
+  divUserCardContent.appendChild(divCardStatus);
 
   const divCardTasks = document.createElement("div") as HTMLDivElement;
   divCardTasks.className = "tasks";
   divCardTasks.textContent = "0 tarefas atribuídas";
-  divUserCard.appendChild(divCardTasks);
+  divUserCardContent.appendChild(divCardTasks);
 
-  const divGroupBtn = document.createElement("div") as HTMLDivElement;
-  divGroupBtn.className = "form-group";
-  divUserCard.appendChild(divGroupBtn);
+  //para agrupar os botoes
+  const divUserCardBtn = document.createElement("div") as HTMLDivElement;
+  divUserCardBtn.className = "userCardBtn";
+  divUserCard.appendChild(divUserCardBtn);
 
   const bntToggle = document.createElement("button") as HTMLButtonElement;
   bntToggle.textContent = user.isAtive
     ? "Desativar Utilizador"
     : "Ativar Utilizador";
-  bntToggle.addEventListener(
-    "click",
-    toggleUserState.bind(null, user.id, userList)
-  );
-  divGroupBtn.appendChild(bntToggle);
+  bntToggle.addEventListener("click", () => toggleUserState(user.id, userList));
+  divUserCardBtn.appendChild(bntToggle);
 
   const btnRemover = document.createElement("button") as HTMLButtonElement;
   btnRemover.textContent = "Remover";
   btnRemover.className = "remove-btn";
-  btnRemover.addEventListener("click", (event) => {
-    event.stopPropagation();
+  btnRemover.addEventListener("click", () => {
     const updatedUserList = removeUserByID(user.id, userList);
     if (updatedUserList) {
       //atualiza a lista de utilizadores
       showUsers(updatedUserList);
     }
   });
-  divGroupBtn.appendChild(btnRemover);
+  divUserCardBtn.appendChild(btnRemover);
 
   usersContainer.appendChild(divUserCard);
 }
@@ -156,7 +163,6 @@ function showUserDetails(user: UserClass) {
     user.isAtive ? "Ativo" : "Inativo"
   }`;
   userDetails.appendChild(detailStatus);
-
   modalContent.appendChild(userDetails);
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
@@ -222,7 +228,10 @@ function countUsers(usersList: UserClass[]): void {
 function countActivePercentage(usersList: UserClass[]): void {
   const activeUsers = usersList.filter((user) => user.isAtive).length;
   const totalUsers = usersList.length;
-  const percentage = totalUsers > 0 ? ((activeUsers / totalUsers) * 100).toFixed(2) : 0;
-  const activePercentageElement = document.querySelector("#ActivePercentage") as HTMLDivElement;
+  const percentage =
+    totalUsers > 0 ? ((activeUsers / totalUsers) * 100).toFixed(2) : 0;
+  const activePercentageElement = document.querySelector(
+    "#ActivePercentage"
+  ) as HTMLDivElement;
   activePercentageElement.textContent = `Percentagem de utilizadores ativos: ${percentage}%`;
 }

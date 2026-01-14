@@ -14,42 +14,49 @@ function createUserCard(user, userList) {
     const divUserCard = document.createElement("div");
     divUserCard.className = "userCard";
     divUserCard.addEventListener("click", showUserDetails.bind(null, user));
+    //para mostrar dados de utilizador
+    const divUserCardContent = document.createElement("div");
+    divUserCardContent.className = "userCardContent";
+    divUserCard.appendChild(divUserCardContent);
+    const divCardId = document.createElement("div");
+    divCardId.textContent = `ID do Utilizador: ${user.id}`;
+    divUserCardContent.appendChild(divCardId);
     const divCardName = document.createElement("div");
     divCardName.textContent = `${user.name}`;
-    divUserCard.appendChild(divCardName);
+    divUserCardContent.appendChild(divCardName);
     const divCardEmail = document.createElement("div");
     divCardEmail.textContent = `${user.email}`;
-    divUserCard.appendChild(divCardEmail);
+    divUserCardContent.appendChild(divCardEmail);
     const divCardStatus = document.createElement("div");
     divCardStatus.textContent = `${user.isAtive ? "ativo" : "Inativo"}`;
     //Mostra o estado com texto ou cor diferente
     divCardStatus.style.color = user.isAtive ? "green" : "red";
-    divUserCard.appendChild(divCardStatus);
+    divUserCardContent.appendChild(divCardStatus);
     const divCardTasks = document.createElement("div");
     divCardTasks.className = "tasks";
     divCardTasks.textContent = "0 tarefas atribuídas";
-    divUserCard.appendChild(divCardTasks);
-    const divGroupBtn = document.createElement("div");
-    divGroupBtn.className = "form-group";
-    divUserCard.appendChild(divGroupBtn);
+    divUserCardContent.appendChild(divCardTasks);
+    //para agrupar os botoes
+    const divUserCardBtn = document.createElement("div");
+    divUserCardBtn.className = "userCardBtn";
+    divUserCard.appendChild(divUserCardBtn);
     const bntToggle = document.createElement("button");
     bntToggle.textContent = user.isAtive
         ? "Desativar Utilizador"
         : "Ativar Utilizador";
-    bntToggle.addEventListener("click", toggleUserState.bind(null, user.id, userList));
-    divGroupBtn.appendChild(bntToggle);
+    bntToggle.addEventListener("click", () => toggleUserState(user.id, userList));
+    divUserCardBtn.appendChild(bntToggle);
     const btnRemover = document.createElement("button");
     btnRemover.textContent = "Remover";
     btnRemover.className = "remove-btn";
-    btnRemover.addEventListener("click", (event) => {
-        event.stopPropagation();
+    btnRemover.addEventListener("click", () => {
         const updatedUserList = removeUserByID(user.id, userList);
         if (updatedUserList) {
             //atualiza a lista de utilizadores
             showUsers(updatedUserList);
         }
     });
-    divGroupBtn.appendChild(btnRemover);
+    divUserCardBtn.appendChild(btnRemover);
     usersContainer.appendChild(divUserCard);
 }
 /* Função de renderização */

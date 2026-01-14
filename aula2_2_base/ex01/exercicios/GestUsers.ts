@@ -3,14 +3,37 @@ import { showUsers, openFormModal, addNewUser } from "./Components.js";
 import { IUser } from "./IUser.js";
 import { UserClass } from "./UserClass.js";
 
-const usersList: IUser[] = [
-  new UserClass(1, "Alice Morais", "alice@example.com"),
-  new UserClass(2, "Bob Silva", "bob@example.com"),
-];
+/* Array de utilizadores */
+const usersList: IUser[] = [];
+
+/* Função para carregar utilizadores iniciais */
+function loadInitialUsers(): void {
+  // Array de dados fake
+  const fakeUsersData = [
+    { id: 1, name: "João Martins", email: "joao@example.com" },
+    { id: 2, name: "Isabela Rodrigues", email: "isabela@example.com" },
+    { id: 3, name: "Henrique Alves", email: "henrique@example.com" },
+    { id: 4, name: "Bob Silva", email: "bob@example.com" },
+    { id: 5, name: "Fernando Costa", email: "fernando@example.com" },
+    { id: 6, name: "Eva Oliveira", email: "eva@example.com" },
+    { id: 7, name: "Diana Santos", email: "diana@example.com" },
+    { id: 8, name: "Alice Morais", email: "alice@example.com" },
+    { id: 9, name: "Carlos Pereira", email: "carlos@example.com" },
+    { id: 10, name: "Gabriela Lima", email: "gabriela@example.com" },
+  ];
+
+  // Usar um ciclo para converter os dados em instâncias da classe
+  for (const userData of fakeUsersData) {
+    const user = new UserClass(userData.id, userData.name, userData.email);
+    usersList.push(user);
+  }
+  // Mostrar os utilizadores
+  showUsers(usersList as UserClass[]);
+}
 
 /* Função principal de gestão de utilizadores */
 export default function GestUsers(): void {
-  showUsers(usersList as UserClass[]);
+  loadInitialUsers(); // Chama a função ao iniciar a aplicação
 }
 
 /* Obter o último ID de utilizador */
@@ -107,9 +130,20 @@ searchUser.addEventListener("input", () => {
 const sortUsersBtn = document.querySelector(
   "#sortUsersBtn"
 ) as HTMLButtonElement;
+//Crie uma variável de controle de estado
+let isAscending = true;
 sortUsersBtn.addEventListener("click", () => {
-  const sortedUsers = [...usersList].sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  const sortedUsers = [...usersList];
+  //Ordenar com base no estado atual
+  if (isAscending) {
+    sortedUsers.sort((a, b) => a.name.localeCompare(b.name));
+  } else {
+    sortedUsers.sort((a, b) => b.name.localeCompare(a.name));
+  }
+  //Inverta o estado para o próximo clique
+  isAscending = !isAscending;
+  // Mostrar os utilizadores ordenados
   showUsers(sortedUsers as UserClass[]);
+  // Atualize o texto ou ícone do botão
+  sortUsersBtn.textContent = isAscending ? "Ordenar A-Z" : "Ordenar Z-A";
 });

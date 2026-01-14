@@ -189,14 +189,16 @@ button[type="submit"]:active {
   flex-direction: column;
   gap: 20px;
   background-color: darkgrey;
-  width: 520px;
+  width: 600px;
   padding: 20px;
   margin-top: 20px;
 }
 
 .userCard {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
   background-color: lightgrey;
   padding: 10px;
@@ -207,6 +209,14 @@ button[type="submit"]:active {
   cursor: pointer;
   background-color: grey;
   color: white;
+}
+
+.userCardContent,
+.userCardBtn {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
 }
 
 .search-add-container {
@@ -240,7 +250,8 @@ button[type="submit"]:active {
 }
 #TotalUsers,
 #ActiveUsers,
-#InactiveUsers {
+#InactiveUsers,
+#ActivePercentage {
   font-weight: bold;
   font-size: 14px;
 }
