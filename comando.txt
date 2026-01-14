@@ -4,4 +4,4 @@
   tsc main.ts
 
 
-  feat: Exercicios de Laboratorio 2_2 - Remover utilizador
+  feat: Exercicios de Laboratorio 2_2 - Procurar utilizador por nome

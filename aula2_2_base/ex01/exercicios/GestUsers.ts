@@ -56,3 +56,15 @@ filterActiveBtn.addEventListener("click", () => {
   const activeUsers = usersList.filter((user) => user.isAtive);
   showUsers(activeUsers as UserClass[]);
 });
+
+/* Procurar utilizador por nome */
+const searchUserInput = document.querySelector(
+  "#searchUser"
+) as HTMLInputElement;
+searchUserInput.addEventListener("input", () => {
+  const name = searchUserInput.value.toLowerCase();
+  const filteredUsers = usersList.filter((user) =>
+    user.name.toLowerCase().includes(name)
+  );
+  showUsers(filteredUsers as UserClass[]);
+});

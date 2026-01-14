@@ -164,3 +164,4 @@ export function addNewUser(id: number): UserClass {
   //retorna um novo objeto do tipo UserClass
   return new UserClass(id, name, email);
 }
+
