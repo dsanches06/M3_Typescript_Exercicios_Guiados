@@ -4,4 +4,4 @@
   tsc main.ts
 
 
-  feat: Exercicios de Laboratorio 2_2 - Validar formulário
+  feat: Exercicios de Laboratorio 2_2 - Mostrar detalhes do utilizador

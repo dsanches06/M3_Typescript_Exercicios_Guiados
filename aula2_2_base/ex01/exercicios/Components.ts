@@ -43,7 +43,9 @@ function createUserCard(user: UserClass, userList: UserClass[]): void {
   divUserCard.appendChild(divGroupBtn);
 
   const bntToggle = document.createElement("button") as HTMLButtonElement;
-  bntToggle.textContent = user.isAtive ? "Desativar Utilizador" : "Ativar Utilizador";
+  bntToggle.textContent = user.isAtive
+    ? "Desativar Utilizador"
+    : "Ativar Utilizador";
   bntToggle.addEventListener(
     "click",
     toggleUserState.bind(null, user.id, userList)
@@ -53,7 +55,8 @@ function createUserCard(user: UserClass, userList: UserClass[]): void {
   const btnRemover = document.createElement("button") as HTMLButtonElement;
   btnRemover.textContent = "Remover";
   btnRemover.className = "remove-btn";
-  btnRemover.addEventListener("click", () => {
+  btnRemover.addEventListener("click", (event) => {
+    event.stopPropagation();
     const updatedUserList = removeUserByID(user.id, userList);
     if (updatedUserList) {
       //atualiza a lista de utilizadores
@@ -73,6 +76,25 @@ export function renderUsers(userList: UserClass[]) {
     //Para cada utilizador, cria um cartão HTML.
     createUserCard(user, userList)
   );
+}
+
+/* Alternar estado (ativo / inativo) */
+function toggleUserState(
+  userID: number,
+  userList: UserClass[],
+  event: Event
+): void {
+  //impede a propagação do evento de clique
+  event.stopPropagation();
+  //encontra o utilizador pelo ID
+  const user = userList.find((user) => user.id === userID);
+  //se o utilizador for encontrado
+  if (user) {
+    //alternar o estado do utilizador
+    user.toggleEstado();
+    //atualiza a exibição dos utilizadores
+    showUsers(userList);
+  }
 }
 
 /* Desativar utilizador */
@@ -110,24 +132,37 @@ function showUserDetails(user: UserClass) {
   closeBtn.textContent = "×";
   modalContent.appendChild(closeBtn);
 
-  const title = document.createElement("h2") as HTMLHeadingElement;
-  title.textContent = user.name;
-  modalContent.appendChild(title);
+  const userDetails = document.createElement("div") as HTMLDivElement;
+  userDetails.id = "userDetails";
+  userDetails.className = "user-details";
 
-  const emailPara = document.createElement("p") as HTMLParagraphElement;
-  emailPara.innerHTML = `<strong>Email:</strong> ${user.email}`;
-  modalContent.appendChild(emailPara);
+  const title = document.createElement("h3") as HTMLHeadingElement;
+  title.textContent = "Detalhes do Utilizador";
+  userDetails.appendChild(title);
 
-  const idPara = document.createElement("p") as HTMLParagraphElement;
-  idPara.innerHTML = `<strong>ID:</strong> ${user.id}`;
-  modalContent.appendChild(idPara);
+  const detailName = document.createElement("p") as HTMLParagraphElement;
+  detailName.id = "detailName";
+  detailName.innerHTML = `<strong>Nome:</strong> ${user.name}`;
+  userDetails.appendChild(detailName);
 
-  const statusPara = document.createElement("p") as HTMLParagraphElement;
-  statusPara.innerHTML = `<strong>Status:</strong> ${
+  const detailEmail = document.createElement("p") as HTMLParagraphElement;
+  detailEmail.id = "detailEmail";
+  detailEmail.innerHTML = `<strong>Email:</strong> ${user.email}`;
+  userDetails.appendChild(detailEmail);
+
+  const detailId = document.createElement("p") as HTMLParagraphElement;
+  detailId.id = "detailId";
+  detailId.innerHTML = `<strong>ID:</strong> ${user.id}`;
+  userDetails.appendChild(detailId);
+
+  const detailStatus = document.createElement("p") as HTMLParagraphElement;
+  detailStatus.id = "detailStatus";
+  detailStatus.innerHTML = `<strong>Status:</strong> ${
     user.isAtive ? "Ativo" : "Inativo"
   }`;
-  modalContent.appendChild(statusPara);
+  userDetails.appendChild(detailStatus);
 
+  modalContent.appendChild(userDetails);
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
   closeModal(modal);
@@ -187,14 +222,3 @@ function countUsers(usersList: UserClass[]): void {
   const totalUsers = document.querySelector("#TotalUsers") as HTMLDivElement;
   totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
 }
-
-/* Alternar estado (ativo / inativo) */
-function toggleUserState(userID: number, userList: UserClass[]): void {
-  const user = userList.find((user) => user.id === userID);
-  if (user) {
-    user.toggleEstado();
-    showUsers(userList);
-  }
-}
-
-
