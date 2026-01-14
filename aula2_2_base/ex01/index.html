@@ -1,20 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Task Manager</title>
+    <title>Gestor de Utilizadores</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Gestor de Utilizadores</h1>
+    <div class="container">
+      <div class="search-add-container">
+        <input
+          type="text"
+          id="searchUser"
+          placeholder="Procurar Utilizador..."
+        />
+        <input type="button" id="addUserBtn" value="Adicionar Utilizador" />
+      </div>
 
-    <div id="usersContainer"></div>
+      <div id="usersContainer"></div>
 
-    <form id="formUser" onsubmit="addUser()">
-      <input type="text" id="nameInput" placeholder="insert the name of user" />
-      <input type="text" id="emailInput" placeholder="insert the email of user"/>
-      <button type="submit">Add new User</button>
-    </form>
+      <div id="modalForm" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add New User</h2>
+          <form id="formUser">
+            <div class="form-group">
+              <label for="nameInput">Name</label>
+              <input
+                type="text"
+                id="nameInput"
+                placeholder="insert the name"
+                required
+              />
+            </div>
 
+            <div class="form-group">
+              <label for="emailInput">Email</label>
+              <input
+                type="email"
+                id="emailInput"
+                placeholder="insert the email"
+                required
+              />
+            </div>
+
+            <button type="submit">Add User</button>
+          </form>
+        </div>
+      </div>
+    </div>
     <script src="main.js" type="module"></script>
   </body>
 </html>

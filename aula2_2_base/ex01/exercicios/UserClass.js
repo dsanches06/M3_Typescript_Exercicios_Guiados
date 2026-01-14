@@ -5,7 +5,7 @@ export class UserClass {
         this.email = email;
         this.isAtive = true;
     }
-    desatived() {
+    desativar() {
         this.isAtive = false;
     }
 }

@@ -1,5 +1,5 @@
 /* Array de utilizadores */
-import { renderUsers } from "./Components.js";
+import { renderUsers, openFormModal, addNewUser } from "./Components.js";
 import { IUser } from "./IUser.js";
 import { UserClass } from "./UserClass.js";
 
@@ -13,41 +13,32 @@ export default function showUsers(): void {
 }
 
 function getLastUserId(): number {
-  let lastUserID = 0;
+  //
+  let lastUserID: number = 0;
   //obter o ultimo utilizador no array
-  //const lastUser = usersList.at(-1);
   const lastUser = usersList[usersList.length - 1];
-  console.log("ID1: ", lastUser.id);
   // Check if the last user exists and get the last user's ID
   if (lastUser) {
-    lastUserID = lastUser.id++;
+    lastUserID = lastUser.id;
   }
-  return lastUserID++;
+  return lastUserID;
 }
 
-export function addUser() {
-  let newId = getLastUserId();
-  const nameInput = document.getElementById("#nameInput") as HTMLInputElement;
-  const name = nameInput.value;
-  console.log(name)
+/* Abrir modal de formulário */
+const addUserBtn = document.querySelector("#addUserBtn") as HTMLButtonElement;
+addUserBtn.addEventListener("click", openFormModal);
 
-  const emailInput = document.getElementById("#emailInput") as HTMLInputElement;
-  const email = emailInput.value;
-    console.log(email)
-
-  const user = new UserClass(newId, name, email);
-
+/* Adicionar utilizador via formulário */
+const formUser = document.querySelector("#formUser") as HTMLFormElement;
+formUser.addEventListener("submit", (event: Event) => {
+  // Prevent form submissio
+  event.preventDefault();
+  //obter um novo id a partir do ultimo
+  let newId = getLastUserId() + 1;
+  //cria um novo user com os dados inseridos no formulario
+  const user = addNewUser(newId);
+  //adiciona a lista de utilizadores
   usersList.push(user);
+  //mostra todos os utilizadores
   showUsers();
-}
-
-function addNewUser(id: number): UserClass {
-  //Lê os valores dos inputs.
-  const nameInput = document.querySelector("#nameInput") as HTMLInputElement;
-  const name = nameInput.value;
-
-  const emailInput = document.querySelector("#emailInput") as HTMLInputElement;
-  const email = emailInput.value;
-  //retorna um novo objeto do tipo UserClass
-  return new UserClass(id, name, email);
-}
+});
