@@ -1,6 +1,7 @@
 /*  Estrutura HTML (cartões) */
 import { UserClass } from "./UserClass.js";
 const usersContainer = document.querySelector("#usersContainer");
+/* Criar cartão de utilizador */
 function createUserCard(user, userList) {
     const divUserCard = document.createElement("div");
     divUserCard.className = "userCard";
@@ -16,10 +17,14 @@ function createUserCard(user, userList) {
     //Mostra o estado com texto ou cor diferente
     divCardStatus.style.color = user.isAtive ? "green" : "red";
     divUserCard.appendChild(divCardStatus);
-    const bntDeactived = document.createElement("button");
-    bntDeactived.textContent = "Inativo";
-    bntDeactived.addEventListener("click", desactivedUser.bind(null, user.id, userList));
-    divUserCard.appendChild(bntDeactived);
+    const divCardTasks = document.createElement("div");
+    divCardTasks.className = "tasks";
+    divCardTasks.textContent = "0 tarefas atribuídas";
+    divUserCard.appendChild(divCardTasks);
+    const bntDesativar = document.createElement("button");
+    bntDesativar.textContent = "Desativar Utilizador";
+    bntDesativar.addEventListener("click", desactivedUser.bind(null, user.id, userList));
+    divUserCard.appendChild(bntDesativar);
     usersContainer.appendChild(divUserCard);
 }
 /* Função de renderização */

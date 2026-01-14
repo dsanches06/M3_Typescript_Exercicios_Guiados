@@ -66,5 +66,7 @@ filterActiveBtn.addEventListener("click", () => {
 /* Contador de utilizadores */
 function countUsers(): void {
   const totalUsers = document.querySelector("#TotalUsers") as HTMLDivElement;
+  totalUsers.style.fontWeight = "bold";
+  totalUsers.style.fontSize = "18px";
   totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
 }

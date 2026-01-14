@@ -6,6 +6,7 @@ const usersContainer = document.querySelector(
   "#usersContainer"
 ) as HTMLDivElement;
 
+/* Criar cartão de utilizador */
 function createUserCard(user: UserClass, userList: UserClass[]): void {
   const divUserCard = document.createElement("div") as HTMLDivElement;
   divUserCard.className = "userCard";
@@ -25,13 +26,18 @@ function createUserCard(user: UserClass, userList: UserClass[]): void {
   divCardStatus.style.color = user.isAtive ? "green" : "red";
   divUserCard.appendChild(divCardStatus);
 
-  const bntDeactived = document.createElement("button") as HTMLButtonElement;
-  bntDeactived.textContent = "Inativo";
-  bntDeactived.addEventListener(
+  const divCardTasks = document.createElement("div") as HTMLDivElement;
+  divCardTasks.className = "tasks";
+  divCardTasks.textContent = "0 tarefas atribuídas";
+  divUserCard.appendChild(divCardTasks);
+
+  const bntDesativar= document.createElement("button") as HTMLButtonElement;
+  bntDesativar.textContent = "Desativar Utilizador";
+  bntDesativar.addEventListener(
     "click",
     desactivedUser.bind(null, user.id, userList)
   );
-  divUserCard.appendChild(bntDeactived);
+  divUserCard.appendChild(bntDesativar);
 
   usersContainer.appendChild(divUserCard);
 }
