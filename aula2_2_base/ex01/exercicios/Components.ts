@@ -11,6 +11,7 @@ export function showUsers(usersList: UserClass[]): void {
   countUsers(usersList);
   countActiveUsers(usersList);
   countInactiveUsers(usersList);
+  countActivePercentage(usersList);
 }
 
 /* Criar cartão de utilizador */
@@ -79,13 +80,7 @@ export function renderUsers(userList: UserClass[]) {
 }
 
 /* Alternar estado (ativo / inativo) */
-function toggleUserState(
-  userID: number,
-  userList: UserClass[],
-  event: Event
-): void {
-  //impede a propagação do evento de clique
-  event.stopPropagation();
+function toggleUserState(userID: number, userList: UserClass[]): void {
   //encontra o utilizador pelo ID
   const user = userList.find((user) => user.id === userID);
   //se o utilizador for encontrado
@@ -221,4 +216,13 @@ function countInactiveUsers(usersList: UserClass[]): void {
 function countUsers(usersList: UserClass[]): void {
   const totalUsers = document.querySelector("#TotalUsers") as HTMLDivElement;
   totalUsers.textContent = `Total de utilizadores: ${usersList.length}`;
+}
+
+/* Percentagem de utilizadores ativos */
+function countActivePercentage(usersList: UserClass[]): void {
+  const activeUsers = usersList.filter((user) => user.isAtive).length;
+  const totalUsers = usersList.length;
+  const percentage = totalUsers > 0 ? ((activeUsers / totalUsers) * 100).toFixed(2) : 0;
+  const activePercentageElement = document.querySelector("#ActivePercentage") as HTMLDivElement;
+  activePercentageElement.textContent = `Percentagem de utilizadores ativos: ${percentage}%`;
 }
