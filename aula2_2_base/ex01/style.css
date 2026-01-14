@@ -1,0 +1,27 @@
+body {
+  font-family: Arial;
+  padding: 20px;
+}
+
+button {
+  width: 100px;
+}
+
+#usersContainer{
+display: flex;
+flex-direction: column;
+gap: 20px;
+background-color: darkgrey;
+width: 250px;
+padding: 20px;
+}
+
+#formUser {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 250px;
+  margin-top: 20px;
+}
+
+

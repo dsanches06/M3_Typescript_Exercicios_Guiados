@@ -120,7 +120,7 @@ function handleEditTask(taskList: Task[], taskId: number): void {
 }
 
 /* Criação de elementos HTML*/
-function createElement(tag: string, texto: string) {
+function createElement(tag: string, texto: string): HTMLElement {
   const element = document.createElement(tag);
   element.textContent = texto;
   return element;

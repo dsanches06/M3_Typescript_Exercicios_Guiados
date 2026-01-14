@@ -14,9 +14,8 @@ const completedTaskBtn = document.querySelector(
   "#completedTaskBtn"
 ) as HTMLButtonElement;
 
-const taskList: ITask[] = [
-
-];
+/*  Array de Tarefas */
+const taskList: ITask[] = [];
 
 /*  Função Principal para Mostrar Tarefas */
 export default function showTasks(): void {
