@@ -12,12 +12,12 @@ function createUserCard(user, userList) {
     divCardEmail.textContent = `${user.email}`;
     divUserCard.appendChild(divCardEmail);
     const divCardStatus = document.createElement("div");
-    divCardStatus.textContent = `${user.isAtive ? "ativo" : "desativado"}`;
+    divCardStatus.textContent = `${user.isAtive ? "ativo" : "Inativo"}`;
     //Mostra o estado com texto ou cor diferente
     divCardStatus.style.color = user.isAtive ? "green" : "red";
     divUserCard.appendChild(divCardStatus);
     const bntDeactived = document.createElement("button");
-    bntDeactived.textContent = "Deactivate";
+    bntDeactived.textContent = "Inativo";
     bntDeactived.addEventListener("click", desactivedUser.bind(null, user.id, userList));
     divUserCard.appendChild(bntDeactived);
     usersContainer.appendChild(divUserCard);
@@ -59,7 +59,7 @@ function showUserDetails(user) {
     idPara.innerHTML = `<strong>ID:</strong> ${user.id}`;
     modalContent.appendChild(idPara);
     const statusPara = document.createElement("p");
-    statusPara.innerHTML = `<strong>Status:</strong> ${user.isAtive ? "Active" : "Deactivated"}`;
+    statusPara.innerHTML = `<strong>Status:</strong> ${user.isAtive ? "Ativo" : "Inativo"}`;
     modalContent.appendChild(statusPara);
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
@@ -85,10 +85,11 @@ export function addNewUser(id) {
     //Lê os valores dos inputs.
     const nameInput = document.querySelector("#nameInput");
     const name = nameInput.value;
-    console.log("name: ", name);
     const emailInput = document.querySelector("#emailInput");
     const email = emailInput.value;
-    console.log("email: ", email);
+    //Limpa os valores dos inputs.
+    nameInput.value = "";
+    emailInput.value = "";
     //retorna um novo objeto do tipo UserClass
     return new UserClass(id, name, email);
 }

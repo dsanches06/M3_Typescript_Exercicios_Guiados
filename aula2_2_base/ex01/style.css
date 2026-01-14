@@ -19,7 +19,7 @@ h1 {
 }
 
 div > input[type="text"],
-div > input[type="button"],
+div > input[type="email"],
 button {
   padding: 10px;
   margin-right: 10px;
@@ -27,12 +27,11 @@ button {
   border-radius: 4px;
 }
 
-input[type="button"],
 button {
   background-color: #007bff;
   color: white;
   cursor: pointer;
-  width: 200px;
+  width: 250px;
 }
 
 input[type="button"]:hover {
@@ -189,7 +188,7 @@ button[type="submit"]:active {
   flex-direction: column;
   gap: 20px;
   background-color: darkgrey;
-  width: 515px;
+  width: 520px;
   padding: 20px;
   margin-top: 20px;
 }
@@ -207,4 +206,17 @@ button[type="submit"]:active {
   cursor: pointer;
   background-color: grey;
   color: white;
+}
+
+.search-add-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#searchUser {
+  width: 520px;
+  margin-bottom: 10px;
 }

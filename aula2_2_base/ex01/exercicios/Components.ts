@@ -20,13 +20,13 @@ function createUserCard(user: UserClass, userList: UserClass[]): void {
   divUserCard.appendChild(divCardEmail);
 
   const divCardStatus = document.createElement("div") as HTMLDivElement;
-  divCardStatus.textContent = `${user.isAtive ? "ativo" : "desativado"}`;
+  divCardStatus.textContent = `${user.isAtive ? "ativo" : "Inativo"}`;
   //Mostra o estado com texto ou cor diferente
   divCardStatus.style.color = user.isAtive ? "green" : "red";
   divUserCard.appendChild(divCardStatus);
 
   const bntDeactived = document.createElement("button") as HTMLButtonElement;
-  bntDeactived.textContent = "Deactivate";
+  bntDeactived.textContent = "Inativo";
   bntDeactived.addEventListener(
     "click",
     desactivedUser.bind(null, user.id, userList)
@@ -83,7 +83,7 @@ function showUserDetails(user: UserClass) {
 
   const statusPara = document.createElement("p") as HTMLParagraphElement;
   statusPara.innerHTML = `<strong>Status:</strong> ${
-    user.isAtive ? "Active" : "Deactivated"
+    user.isAtive ? "Ativo" : "Inativo"
   }`;
   modalContent.appendChild(statusPara);
 
@@ -116,6 +116,9 @@ export function addNewUser(id: number): UserClass {
   const name = nameInput.value;
   const emailInput = document.querySelector("#emailInput") as HTMLInputElement;
   const email = emailInput.value;
+  //Limpa os valores dos inputs.
+  nameInput.value = "";
+  emailInput.value = "";
   //retorna um novo objeto do tipo UserClass
   return new UserClass(id, name, email);
 }

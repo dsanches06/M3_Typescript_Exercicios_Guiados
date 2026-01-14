@@ -39,6 +39,18 @@ formUser.addEventListener("submit", (event: Event) => {
   const user = addNewUser(newId);
   //adiciona a lista de utilizadores
   usersList.push(user);
+  //fecha o modal
+  const modalForm = document.querySelector("#modalForm") as HTMLDivElement;
+  modalForm.style.display = "none";
   //mostra todos os utilizadores
   showUsers();
+});
+
+/* Filtrar utilizadores ativos */
+const filterActiveBtn = document.querySelector(
+  "#activeUsersBtn"
+) as HTMLButtonElement;
+filterActiveBtn.addEventListener("click", () => {
+  const activeUsers = usersList.filter((user) => user.isAtive);
+  renderUsers(activeUsers as UserClass[]);
 });
