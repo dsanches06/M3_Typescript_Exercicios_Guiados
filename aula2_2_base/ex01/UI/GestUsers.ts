@@ -1,27 +1,15 @@
 /* Array de utilizadores */
-import { showUsers, openFormModal, addNewUser } from "./Components.js";
-import { IUser } from "./IUser.js";
-import { UserClass } from "./UserClass.js";
+import { IUser } from "../Model/IUser.js";
+import { UserClass } from "../Model/UserClass.js";
+import { fakeUsersData } from "../helpers/fakeUsersData.js";
+import { openFormModal } from "./ModalUI.js";
+import { addNewUser, showUsers } from "./UsersUI.js";
 
 /* Array de utilizadores */
 const usersList: IUser[] = [];
 
-/* Função para carregar utilizadores iniciais */
-function loadInitialUsers(): void {
-  // Array de dados fake
-  const fakeUsersData = [
-    { id: 1, name: "João Martins", email: "joao@example.com" },
-    { id: 2, name: "Isabela Rodrigues", email: "isabela@example.com" },
-    { id: 3, name: "Henrique Alves", email: "henrique@example.com" },
-    { id: 4, name: "Bob Silva", email: "bob@example.com" },
-    { id: 5, name: "Fernando Costa", email: "fernando@example.com" },
-    { id: 6, name: "Eva Oliveira", email: "eva@example.com" },
-    { id: 7, name: "Diana Santos", email: "diana@example.com" },
-    { id: 8, name: "Alice Morais", email: "alice@example.com" },
-    { id: 9, name: "Carlos Pereira", email: "carlos@example.com" },
-    { id: 10, name: "Gabriela Lima", email: "gabriela@example.com" },
-  ];
-
+/* Função principal para carregar utilizadores iniciais */
+export default function loadInitialUsers(): void {
   // Usar um ciclo para converter os dados em instâncias da classe
   for (const userData of fakeUsersData) {
     const user = new UserClass(userData.id, userData.name, userData.email);
@@ -29,11 +17,6 @@ function loadInitialUsers(): void {
   }
   // Mostrar os utilizadores
   showUsers(usersList as UserClass[]);
-}
-
-/* Função principal de gestão de utilizadores */
-export default function GestUsers(): void {
-  loadInitialUsers(); // Chama a função ao iniciar a aplicação
 }
 
 /* Obter o último ID de utilizador */

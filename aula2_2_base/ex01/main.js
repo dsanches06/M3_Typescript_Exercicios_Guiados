@@ -1,2 +1,2 @@
-import GestUsers from "./exercicios/GestUsers.js";
-GestUsers();
+import loadInitialUsers from './UI/GestUsers.js';
+loadInitialUsers();

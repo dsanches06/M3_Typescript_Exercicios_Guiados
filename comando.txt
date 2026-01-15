@@ -4,7 +4,7 @@
   tsc main.ts
 
 
-  feat: Exercicios de Laboratorio 2_2 - Simular dados iniciais
+  feat: Exercicios de Laboratorio 2_2 - Refactorização e organização da estrutura 
 
 
 //recebe o evento na função
