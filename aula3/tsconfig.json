@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "paths": {
+      "@models": ["models/*"],
+      "@services": ["services/*"],
+      "@ui": ["ui/*"],
+      "@utils": ["utils/*"]
+    },
+    "strict": true
+  }
+}
