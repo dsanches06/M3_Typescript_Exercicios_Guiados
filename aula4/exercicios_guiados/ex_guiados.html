@@ -1,0 +1,308 @@
+<html>
+
+<head>
+    <style>
+        body {
+            color: black;
+            font-family: Arial;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #006600;
+        }
+
+        h2 {
+            color: #003366;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+
+        b {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+        }
+
+        i {
+            color: #555;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Exercícios Guiados — OOP em TypeScript (Sistema de Gestão de Projetos)</h1>
+
+<p>
+<b>Objetivo:</b><br>
+Construir um sistema funcional de gestão de utilizadores e tarefas,
+aplicando <b>encapsulamento</b>, <b>interfaces</b>, <b>herança</b>, 
+<b>classes abstratas</b> e <b>polimorfismo</b>, focado em regras de negócio reais.
+</p>
+
+<hr>
+
+<h2>Exercício 1 — Classe base comum</h2>
+<p><b>Ficheiro:</b> <i>models/BaseEntity.ts</i></p>
+
+<pre>
+export class BaseEntity {
+    protected id: number;
+    protected createdAt: Date;
+
+    constructor(id: number) {
+        // TODO: inicializar id e createdAt
+    }
+
+    getId(): number {
+        // TODO
+    }
+
+    getCreatedAt(): Date {
+        // TODO
+    }
+}
+</pre>
+
+<hr>
+
+<h2>Exercício 2 — Herança em User</h2>
+<p><b>Ficheiro:</b> <i>models/UserClass.ts</i></p>
+
+<pre>
+import { BaseEntity } from './BaseEntity';
+import { UserRole } from '../security/UserRole';
+
+export class UserClass extends BaseEntity {
+
+    private email: string;
+    private active: boolean;
+    private role: UserRole;
+
+    constructor(id: number, email: string, role: UserRole) {
+        super(id);
+        // TODO: inicializar propriedades
+    }
+
+    isActive(): boolean {
+        // TODO
+    }
+
+    toggleActive(): void {
+        // TODO
+    }
+
+    getRole(): UserRole {
+        // TODO
+    }
+}
+</pre>
+
+<hr>
+
+<h2>Exercício 3 — Encapsulamento e validação</h2>
+<p><b>Ficheiro:</b> <i>models/UserClass.ts</i></p>
+
+<pre>
+// TODO:
+// - Criar getters
+// - Criar setters
+// - Validar email
+// - Impedir valores inválidos
+// - Bloquear alteração direta de propriedades privadas
+</pre>
+
+<hr>
+
+<h2>Exercício 4 — Interface de Tarefa</h2>
+<p><b>Ficheiro:</b> <i>tasks/ITask.ts</i></p>
+
+<pre>
+import { TaskStatus } from './TaskStatus';
+
+export interface ITask {
+    id: number;
+    title: string;
+    completed: boolean;
+    status: TaskStatus;
+
+    getType(): string;
+    moveTo(status: TaskStatus): void;
+}
+</pre>
+
+<hr>
+
+<h2>Exercício 5 — Enum de estados de tarefa</h2>
+<p><b>Ficheiro:</b> <i>tasks/TaskStatus.ts</i></p>
+
+<pre>
+export enum TaskStatus {
+    CREATED,
+    ASSIGNED,
+    IN_PROGRESS,
+    BLOCKED,
+    COMPLETED,
+    ARCHIVED
+}
+</pre>
+
+<hr>
+
+<h2>Exercício 6 — Implementação concreta de Task</h2>
+<p><b>Ficheiro:</b> <i>tasks/BugTask.ts</i></p>
+
+<pre>
+import { ITask } from './ITask';
+import { TaskStatus } from './TaskStatus';
+
+export class BugTask implements ITask {
+
+    id: number;
+    title: string;
+    completed: boolean;
+    status: TaskStatus;
+
+    constructor(id: number, title: string) {
+        // TODO: inicializar propriedades
+    }
+
+    getType(): string {
+        // TODO: retornar "bug"
+    }
+
+    moveTo(status: TaskStatus): void {
+        // TODO:
+        // - validar transição
+        // - atualizar estado
+        // - marcar completed se necessário
+    }
+}
+</pre>
+
+<hr>
+
+<h2>Exercício 7 — Polimorfismo funcional</h2>
+<p><b>Ficheiro:</b> <i>tasks/taskUtils.ts</i></p>
+
+<pre>
+import { ITask } from './ITask';
+
+export function processTask(task: ITask) {
+    // TODO:
+    // - usar getType()
+    // - aplicar lógica diferente conforme tipo
+}
+</pre>
+
+<hr>
+
+<h2>Exercício 8 — Sistema de permissões</h2>
+
+<p><b>Ficheiro do enum:</b> <i>security/UserRole.ts</i></p>
+
+<pre>
+export enum UserRole {
+    ADMIN,
+    MANAGER,
+    MEMBER,
+    VIEWER
+}
+</pre>
+
+<p><b>Ficheiro das regras:</b> <i>security/permissionService.ts</i></p>
+
+<pre>
+import { UserRole } from './UserRole';
+
+export function canCreateTask(role: UserRole): boolean {
+    // TODO
+}
+
+export function canEditTask(role: UserRole): boolean {
+    // TODO
+}
+
+export function canDeleteTask(role: UserRole): boolean {
+    // TODO
+}
+
+export function canAssignTask(role: UserRole): boolean {
+    // TODO
+}
+</pre>
+
+<hr>
+
+<h2>Exercício 9 — Histórico de alterações</h2>
+<p><b>Ficheiro:</b> <i>logs/HistoryLog.ts</i></p>
+
+<pre>
+export class HistoryLog {
+
+    private logs: string[] = [];
+
+    addLog(message: string) {
+        // TODO
+    }
+
+    getLogs(): string[] {
+        // TODO
+    }
+
+    clearLogs() {
+        // TODO
+    }
+}
+</pre>
+
+<hr>
+
+<h2>Exercício 10 — Sistema de notificações</h2>
+<p><b>Ficheiro:</b> <i>notifications/NotificationService.ts</i></p>
+
+<pre>
+export class NotificationService {
+
+    notifyUser(userId: number, message: string) {
+        // TODO
+    }
+
+    notifyGroup(userIds: number[], message: string) {
+        // TODO
+    }
+
+    notifyAdmins(message: string) {
+        // TODO
+    }
+}
+</pre>
+
+<hr>
+
+<h2>Objetivo final do sistema</h2>
+
+<ul>
+<li>Gestão de utilizadores</li>
+<li>Gestão de tarefas</li>
+<li>Estados de workflow</li>
+<li>Sistema de permissões</li>
+<li>Regras de negócio</li>
+<li>Validações</li>
+<li>Histórico de ações</li>
+<li>Notificações</li>
+<li>Polimorfismo real</li>
+<li>Arquitetura modular</li>
+<li>Encapsulamento real</li>
+<li>Separação de responsabilidades</li>
+</ul>
+
+</body>
+</html>

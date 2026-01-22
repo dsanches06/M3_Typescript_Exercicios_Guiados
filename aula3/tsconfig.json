@@ -4,14 +4,13 @@
     "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": "./src",
-    "rootDir": "./src",
-    "outDir": "./dist",
     "paths": {
-      "@models": ["models/*"],
-      "@services": ["services/*"],
-      "@ui": ["ui/*"],
-      "@utils": ["utils/*"]
-    },
-    "strict": true
+      "@models": ["models/index"], // Mapeia o import direto de "@models"
+      "@models/*": ["models/*"], // Mapeia imports específicos como "@models/user"
+      "@services": ["services/index"],
+      "@services/*": ["services/*"],
+      "@ui": ["ui/index"],
+      "@ui/*": ["ui/*"]
+    }
   }
 }

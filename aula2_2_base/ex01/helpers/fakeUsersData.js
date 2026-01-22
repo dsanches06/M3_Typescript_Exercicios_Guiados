@@ -1,5 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.fakeUsersData = void 0;
 // Array de dados fake
-export const fakeUsersData = [
+exports.fakeUsersData = [
     { id: 1, name: "João Martins", email: "joao@example.com" },
     { id: 2, name: "Isabela Rodrigues", email: "isabela@example.com" },
     { id: 3, name: "Henrique Alves", email: "henrique@example.com" },

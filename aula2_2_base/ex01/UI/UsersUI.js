@@ -1,40 +1,48 @@
-import { UserClass } from "../Model/UserClass.js";
-import { createUserCard } from "./userCardUI.js";
-import { countUsers, countActiveUsers, countInactiveUsers, countActivePercentage, } from "./contadoresUI.js";
-const usersContainer = document.querySelector("#usersContainer");
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.showUsers = showUsers;
+exports.renderUsers = renderUsers;
+exports.addNewUser = addNewUser;
+exports.toggleUserState = toggleUserState;
+exports.removeUserByID = removeUserByID;
+var UserClass_js_1 = require("../Model/UserClass.js");
+var userCardUI_js_1 = require("./userCardUI.js");
+var contadoresUI_js_1 = require("./contadoresUI.js");
+var usersContainer = document.querySelector("#usersContainer");
 /* Mostrar utilizadores */
-export function showUsers(usersList) {
+function showUsers(usersList) {
     renderUsers(usersList);
-    countUsers(usersList);
-    countActiveUsers(usersList);
-    countInactiveUsers(usersList);
-    countActivePercentage(usersList);
+    (0, contadoresUI_js_1.countUsers)(usersList);
+    (0, contadoresUI_js_1.countActiveUsers)(usersList);
+    (0, contadoresUI_js_1.countInactiveUsers)(usersList);
+    (0, contadoresUI_js_1.countActivePercentage)(usersList);
 }
 /* Função de renderização */
-export function renderUsers(userList) {
+function renderUsers(userList) {
     //Limpa o contentor HTML.
     usersContainer.innerHTML = "";
-    userList.forEach((user) => 
-    //Para cada utilizador, cria um cartão HTML.
-    createUserCard(user, userList));
+    userList.forEach(function (user) {
+        //Para cada utilizador, cria um cartão HTML.
+        return (0, userCardUI_js_1.createUserCard)(user, userList);
+    });
 }
 /* Função para adicionar novo utilizador */
-export function addNewUser(id) {
+function addNewUser(id) {
     //Lê os valores dos inputs.
-    const nameInput = document.querySelector("#nameInput");
-    const name = nameInput.value;
-    const emailInput = document.querySelector("#emailInput");
-    const email = emailInput.value;
+    var nameInput = document.querySelector("#nameInput");
+    var name = nameInput.value;
+    var emailInput = document.querySelector("#emailInput");
+    var email = emailInput.value;
     //Limpa os valores dos inputs.
     nameInput.value = "";
     emailInput.value = "";
     //retorna um novo objeto do tipo UserClass
-    return new UserClass(id, name, email);
+    return new UserClass_js_1.UserClass(id, name, email);
 }
 /* Alternar estado (ativo / inativo) */
-export function toggleUserState(userID, userList) {
+function toggleUserState(userID, userList) {
     //encontra o utilizador pelo ID
-    const user = userList.find((user) => user.id === userID);
+    var user = userList.find(function (user) { return user.id === userID; });
     //se o utilizador for encontrado
     if (user) {
         //alternar o estado do utilizador
@@ -44,9 +52,9 @@ export function toggleUserState(userID, userList) {
     }
 }
 /* Remover utilizador */
-export function removeUserByID(userID, userList) {
+function removeUserByID(userID, userList) {
     // Usa filter() para criar um novo array sem o utilizador com o ID especificado
-    const updatedUserList = userList.filter((user) => user.id !== userID);
+    var updatedUserList = userList.filter(function (user) { return user.id !== userID; });
     //retorna a lista atualizada
     return updatedUserList;
 }

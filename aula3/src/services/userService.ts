@@ -1,4 +1,4 @@
-import { UserClass } from "../models";
+import { UserClass } from "@models";
 
 const users: UserClass[] = [];
 

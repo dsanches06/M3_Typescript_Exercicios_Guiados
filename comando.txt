@@ -6,9 +6,4 @@
 
   feat: Exercicios de Laboratorio 2_2 - Refactorização e organização da estrutura 
 
-
-//recebe o evento na função
-  event: Event
-  //impede a propagação do evento de clique
-  event.stopPropagation();
   

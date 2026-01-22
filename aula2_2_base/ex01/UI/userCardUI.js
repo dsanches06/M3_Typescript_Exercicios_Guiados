@@ -1,61 +1,64 @@
-import { showUsers } from "./UsersUI.js";
-import { toggleUserState, removeUserByID } from "./UsersUI.js";
-import { closeModal, modalUserContent, modalUserDetail } from "./ModalUI.js";
-const usersContainer = document.querySelector("#usersContainer");
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createUserCard = createUserCard;
+var UsersUI_js_1 = require("./UsersUI.js");
+var UsersUI_js_2 = require("./UsersUI.js");
+var ModalUI_js_1 = require("./ModalUI.js");
+var usersContainer = document.querySelector("#usersContainer");
 /* Criar cartão de utilizador */
-export function createUserCard(user, userList) {
-    const divUserCard = document.createElement("div");
+function createUserCard(user, userList) {
+    var divUserCard = document.createElement("div");
     divUserCard.className = "userCard";
-    divUserCard.addEventListener("click", () => showUserDetails(user));
-    const divUserCardContent = modalUserContent(user);
+    divUserCard.addEventListener("click", function () { return showUserDetails(user); });
+    var divUserCardContent = (0, ModalUI_js_1.modalUserContent)(user);
     divUserCardContent.className = "userCardContent";
     divUserCard.appendChild(divUserCardContent);
-    const divUserCardBtn = userCardBtn(user, userList);
+    var divUserCardBtn = userCardBtn(user, userList);
     divUserCardBtn.className = "userCardBtn";
     divUserCard.appendChild(divUserCardBtn);
     usersContainer.appendChild(divUserCard);
 }
 /* Modal para visualização de detalhes do utilizador */
 function showUserDetails(user) {
-    const modal = document.createElement("div");
+    var modal = document.createElement("div");
     modal.className = "modal";
     modal.style.display = "flex";
-    const modalContent = document.createElement("div");
+    var modalContent = document.createElement("div");
     modalContent.className = "modal-content";
-    const closeBtn = document.createElement("span");
+    var closeBtn = document.createElement("span");
     closeBtn.className = "close";
     closeBtn.textContent = "×";
-    const userDetails = modalUserDetail(user);
+    var userDetails = (0, ModalUI_js_1.modalUserDetail)(user);
     userDetails.id = "userDetails";
     userDetails.className = "user-details";
     modalContent.appendChild(closeBtn);
     modalContent.appendChild(userDetails);
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
-    closeModal(modal);
+    (0, ModalUI_js_1.closeModal)(modal);
 }
 function userCardBtn(user, userList) {
-    const bntToggle = document.createElement("button");
+    var bntToggle = document.createElement("button");
     bntToggle.textContent = user.isAtive
         ? "Desativar Utilizador"
         : "Ativar Utilizador";
-    bntToggle.addEventListener("click", (event) => {
+    bntToggle.addEventListener("click", function (event) {
         event.stopPropagation();
-        toggleUserState(user.id, userList);
+        (0, UsersUI_js_2.toggleUserState)(user.id, userList);
     });
-    const btnRemover = document.createElement("button");
+    var btnRemover = document.createElement("button");
     btnRemover.textContent = "Remover";
     btnRemover.className = "remove-btn";
-    btnRemover.addEventListener("click", (event) => {
+    btnRemover.addEventListener("click", function (event) {
         event.stopPropagation();
-        const updatedUserList = removeUserByID(user.id, userList);
+        var updatedUserList = (0, UsersUI_js_2.removeUserByID)(user.id, userList);
         if (updatedUserList) {
             //atualiza a lista de utilizadores
-            showUsers(updatedUserList);
+            (0, UsersUI_js_1.showUsers)(updatedUserList);
         }
     });
     //para agrupar os botoes
-    const divUserCardBtn = document.createElement("div");
+    var divUserCardBtn = document.createElement("div");
     divUserCardBtn.appendChild(bntToggle);
     divUserCardBtn.appendChild(btnRemover);
     return divUserCardBtn;

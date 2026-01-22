@@ -54,7 +54,7 @@ function userCardBtn(user: UserClass, userList: UserClass[]): HTMLDivElement {
   bntToggle.textContent = user.isAtive
     ? "Desativar Utilizador"
     : "Ativar Utilizador";
-  bntToggle.addEventListener("click", (event) => {
+  bntToggle.addEventListener("click", (event: Event) => {
     event.stopPropagation();
     toggleUserState(user.id, userList);
   });
@@ -62,7 +62,7 @@ function userCardBtn(user: UserClass, userList: UserClass[]): HTMLDivElement {
   const btnRemover = document.createElement("button") as HTMLButtonElement;
   btnRemover.textContent = "Remover";
   btnRemover.className = "remove-btn";
-  btnRemover.addEventListener("click", (event) => {
+  btnRemover.addEventListener("click", (event: Event) => {
     event.stopPropagation();
     const updatedUserList = removeUserByID(user.id, userList);
     if (updatedUserList) {
