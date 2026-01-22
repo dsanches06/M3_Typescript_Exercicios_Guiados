@@ -6,4 +6,24 @@
 
   feat: Exercicios de Laboratorio 2_2 - Refactorização e organização da estrutura 
 
+  {
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": {
+      "@models/*": ["models/*"],
+      "@services/*": ["services/*"],
+      "@ui/*": ["ui/*"],
+      "@utils/*": ["utils/*"]
+    },
+    "outDir": "./dist",
+    "strict": true
+  },
+  "include": ["src"]
+}
+
+    
+
   

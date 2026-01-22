@@ -5,12 +5,13 @@
     "moduleResolution": "node",
     "baseUrl": "./src",
     "paths": {
-      "@models": ["models/index"], // Mapeia o import direto de "@models"
-      "@models/*": ["models/*"], // Mapeia imports específicos como "@models/user"
-      "@services": ["services/index"],
+      "@models/*": ["models/*"],
       "@services/*": ["services/*"],
-      "@ui": ["ui/index"],
-      "@ui/*": ["ui/*"]
-    }
-  }
+      "@ui/*": ["ui/*"],
+      "@utils/*": ["utils/*"]
+    },
+    "outDir": "./dist",
+    "strict": true
+  },
+  "include": ["src"]
 }

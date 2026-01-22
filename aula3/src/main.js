@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var _models_1 = require("@models");
-var _services_1 = require("@services");
-var _ui_1 = require("@ui");
-var user1 = new _models_1.UserClass(1, "Alice", "alice@email.com");
-var user2 = new _models_1.UserClass(2, "Bob", "bob@email.com");
-(0, _services_1.addUser)(user1);
-(0, _services_1.addUser)(user2);
-(0, _ui_1.renderUser)((0, _services_1.getActiveUsers)());
+import { UserClass } from "@models/index";
+import { addUser, getActiveUsers } from "@services/index";
+import { renderUser } from "@ui/index";
+const user1 = new UserClass(1, "Alice", "alice@email.com");
+const user2 = new UserClass(2, "Bob", "bob@email.com");
+addUser(user1);
+addUser(user2);
+renderUser(getActiveUsers());

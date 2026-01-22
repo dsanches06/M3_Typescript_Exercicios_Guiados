@@ -5,6 +5,7 @@ export interface IUser {
   active: boolean;
 }
 
+
 export class UserClass implements IUser {
   constructor(
     public id: number,

@@ -1,4 +1,4 @@
-import { UserClass } from "@models";
+import { UserClass } from '@models/user';
 
 export function renderUser(users: UserClass[]) {
   const container = document.getElementById("user-container")!;
