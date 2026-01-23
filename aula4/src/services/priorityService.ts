@@ -1,6 +1,5 @@
-import { ITask } from "models/tasks/ITask";
-import { BugTask } from "models/tasks/BugTask";
-import { Priority } from "utils/priority";
+import { BugTask, ITask } from "../tasks/index.js";
+import { Priority } from "../utils/index.js";
 
 export class PriorityService {
   private tasks: ITask[];
@@ -12,23 +11,24 @@ export class PriorityService {
   }
 
   setPriority(taskId: number, priority: Priority) {
-    const task = this.tasks.find((t) => t.id === taskId) as BugTask;
+    const task = this.tasks.find((t) => t.id === taskId);
     if (task) {
-      task.setPriority(priority);
+      //task.setPriority(priority);
     }
   }
 
   getPriority(taskId: number) {
-    const task = this.tasks.find((t) => t.id === taskId) as BugTask;
+    const task = this.tasks.find((t) => t.id === taskId);
     if (task) {
-      return task.getPriority();
+      //return task.getPriority();
     }
   }
 
   getHighPriorityTasks(): BugTask[] {
-    return this.tasks.filter((t) => {
+    /* return this.tasks.filter((t) => {
       const task = t as BugTask;
       return task.getPriority() === this.priority;
-    }) as BugTask[];
+    }) as BugTask[];*/
+    return [];
   }
 }

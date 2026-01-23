@@ -1,12 +1,11 @@
-import { ITask } from "models/tasks/ITask";
-import { TaskStatus } from "models/tasks/TaskStatus";
-import { UserClass } from "models/user/UserClass";
+import { IUser } from "../models/index.js";
+import { ITask, TaskStatus } from "../tasks/index.js";
 
 export class StatisticsService {
-  private users: UserClass[];
+  private users: IUser[];
   private tasks: ITask[];
 
-  constructor(users: UserClass[], tasks: ITask[]) {
+  constructor(users: IUser[], tasks: ITask[]) {
     this.users = users;
     this.tasks = tasks;
   }

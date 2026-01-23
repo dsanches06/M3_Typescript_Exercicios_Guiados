@@ -1,4 +1,4 @@
-import { ITask } from "./ITask";
+import { ITask } from "../tasks/index.js";
 
 // Função para processar uma tarefa com base no seu tipo
 //ver isso

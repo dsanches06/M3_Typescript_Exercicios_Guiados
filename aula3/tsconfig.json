@@ -1,16 +1,12 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "nodenext",
+    "target": "es6",
+    "module": "esnext",                // ES Modules
+    "moduleResolution": "node",
     "baseUrl": "./src",
-    "paths": {
-      "@models/*": ["models/*"],
-      "@services/*": ["services/*"],
-      "@ui/*": ["ui/*"],
-      "@utils/*": ["utils/*"]
-    },
     "outDir": "./dist",
-    "strict": true
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

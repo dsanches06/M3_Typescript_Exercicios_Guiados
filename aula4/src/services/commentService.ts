@@ -1,13 +1,13 @@
-import { UserClass } from "models/user/UserClass";
-import { Comment } from "./../models/comment/Comment";
-import { BugTask } from "models/tasks/BugTask";
+import { IUser } from "../models/index.js";
+import { Comment } from "../comments/index.js";
+import { ITask } from "../tasks/index.js";
 
 export class CommentService {
-  private users: UserClass[];
-  private tasks: BugTask[];
+  private users: IUser[];
+  private tasks: ITask[];
   private comments: Comment[];
 
-  constructor(users: UserClass[], tasks: BugTask[]) {
+  constructor(users: IUser[], tasks: ITask[]) {
     this.users = users;
     this.tasks = tasks;
     this.comments = [];

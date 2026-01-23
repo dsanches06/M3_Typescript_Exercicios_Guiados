@@ -1,6 +1,5 @@
-import { Attachment } from "models/attachment/Attachment";
-import { ITask } from "models/tasks/ITask";
-import { BugTask } from "models/tasks/BugTask";
+import { Attachment } from "../attachments/index.js";
+import { ITask } from "../tasks/index.js";
 
 export class AttachmentService {
   private tasks: ITask[];
@@ -11,16 +10,17 @@ export class AttachmentService {
 
   // Funções para gerenciar attachments relacionados a tasks
   addAttachment(taskId: number, attachment: Attachment) {
-    const task = this.tasks.find((t) => t.id === taskId) as BugTask;
+    const task = this.tasks.find((t) => t.id === taskId);
     if (task) {
-      task.getAttachments().push(attachment);
+      //task.getAttachments().push(attachment);
     }
   }
 
   // Retorna todos os attachments de uma task específica
   getAttachments(taskId: number): Attachment[] {
-    const task = this.tasks.find((t) => t.id === taskId) as BugTask;
-    return task.getAttachments();
+    const task = this.tasks.find((t) => t.id === taskId);
+    // return task.getAttachments();
+    return [];
   }
 
   // Remove um attachment específico

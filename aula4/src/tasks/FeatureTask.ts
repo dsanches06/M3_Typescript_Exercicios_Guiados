@@ -1,16 +1,19 @@
-import { Priority } from "./../../utils/priority";
-import { UserClass } from "models/user/UserClass";
-import { ITask } from "./ITask";
-import { TaskStatus } from "./TaskStatus";
-import { DeadLine } from "models/deadLine/DeadLine";
-import { Attachment } from "models/attachment/Attachment";
 
-export class BugTask implements ITask {
+import { Attachment } from "../attachments/index.js";
+import { Priority } from "../utils/index.js";
+import { IUser } from "../models/index.js";
+import { ITask, TaskStatus } from "../tasks/index.js";
+import { DeadLine } from "../deadlines/index.js";
+
+
+
+
+export class FeatureTask implements ITask {
   id: number;
   title: string;
   completed: boolean;
   status: TaskStatus;
-  private users: UserClass[];
+  private users: IUser[];
   private taskPriority: Priority;
   private tags: string[];
   private deadLine: DeadLine;
@@ -30,12 +33,12 @@ export class BugTask implements ITask {
     this.attachements = [];
   }
 
-  getUsersFromTask(): UserClass[] {
+  getUsersFromTask(): IUser[] {
     return this.users;
   }
 
   removeUserFromTask(userId: number): void {
-    const userIndex = this.users.findIndex((u) => u.getId() === userId);
+    const userIndex = this.users.findIndex((u) => u.id === userId);
     if (userIndex !== -1) {
       this.users.splice(userIndex, 1);
     }
@@ -77,7 +80,7 @@ export class BugTask implements ITask {
   }
 
   getType(): string {
-    return "Bug";
+    return "feature";
   }
 
   moveTo(status: TaskStatus): void {
@@ -91,13 +94,13 @@ export class BugTask implements ITask {
       [TaskStatus.ARCHIVED]: [],
     };
     // - validar transição
-    if (validTransitions[this.status]?.includes(status)) {
+    //if (validTransitions[this.status]?.includes(status)) {
       // - atualizar estado
       this.status = status;
       // - marcar completed se necessário
       if (this.status === TaskStatus.COMPLETED) {
         this.completed = true;
       }
-    }
+   // }
   }
 }

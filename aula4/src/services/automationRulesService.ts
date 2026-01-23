@@ -1,9 +1,7 @@
-import { TaskStatus } from "models/tasks/TaskStatus";
-import { ITask } from "../models/tasks/ITask";
-import { UserClass } from "../models/user/UserClass";
-import { HistoryLog } from "models/logs/HistoryLog";
-import { BugTask } from "models/tasks/BugTask";
-import { NotificationService } from "./notificationService";
+import { TaskStatus, ITask, BugTask } from "../tasks/index.js";
+import { IUser, UserClass } from "../models/index.js";
+import { HistoryLog } from "../logs/index.js";
+import { NotificationService } from "../services/index.js";
 
 export class AutomationRulesService {
   //construtor vazio
@@ -16,13 +14,13 @@ export class AutomationRulesService {
       log.addLog(`Task ${task.id} completed on ${Date.now()}`);
     } //
     else if (task.status === TaskStatus.BLOCKED) {
-      const assignedUsers: UserClass[] = (task as BugTask).getUsersFromTask();
-      const usersId: number[] = assignedUsers.map((user) => user.getId());
-      const notification = new NotificationService(assignedUsers);
-      notification.notifyGroup(
-        usersId,
-        `Task ${task.id} is blocked. Please take action.`,
-      );
+      //  const assignedUsers: IUser[] = task.getUsersFromTask();
+      //const usersId: number[] = assignedUsers.map((user) => user.getId());
+      // const notification = new NotificationService(assignedUsers);
+      // notification.notifyGroup(
+      //usersId,
+      // `Task ${task.id} is blocked. Please take action.`,
+      // );
     }
     //- Se task expirar → mover para BLOCKED
     // if (task.dueDate && new Date(task.dueDate) < new Date()) {
@@ -31,11 +29,11 @@ export class AutomationRulesService {
   }
 
   //- Se user ficar inactive → remover assignments
-  applyUserRules(user: UserClass) {
-    if (!user.isActive()) {
-      user.getTasksFromUser().forEach((task) => {
-        user.removeTask(task.id);
-      });
-    }
+  applyUserRules(user: IUser) {
+    //if (!user.isActive()) {
+    //  user.getTasksFromUser().forEach((task) => {
+    //  user.removeTask(task.id);
+    ////});
+    //}
   }
 }

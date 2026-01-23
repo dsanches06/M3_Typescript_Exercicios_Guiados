@@ -6,4 +6,12 @@ export class BaseEntity {
     this.id = id;
     this.createdAt = new Date();
   }
+
+  getId(): number {
+    return this.id;
+  }
+
+  getCreatedAt(): Date {
+    return this.createdAt;
+  }
 }

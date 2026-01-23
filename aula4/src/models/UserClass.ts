@@ -1,19 +1,25 @@
-import { ITask } from "models/tasks/ITask";
-import { UserRole } from "security/UserRole";
-import { BaseEntity } from "./BaseEntity";
+import { IUser, BaseEntity } from "./index.js";
+import {UserRole} from '../security/index.js'
+import {ITask} from '../tasks/index.js'
 
-export class UserClass extends BaseEntity {
-  private email: string;
-  private active: boolean;
+
+
+export class UserClass extends BaseEntity implements IUser{
+  public id:number;
+  public name:string;
+  public email: string;
+  public active: boolean;
   private role: UserRole;
   private tasks: ITask[];
   private notifications: Notification[];
 
-  constructor(id: number, email: string, role: UserRole) {
+  constructor(id: number, name:string,email:string, userRole:UserRole) {
     super(id);
+    this.id=id;
+    this.name=name;
     this.email = email;
     this.active = true;
-    this.role = role;
+    this.role = ;
     this.tasks = [];
     this.notifications = [];
   }
@@ -37,14 +43,6 @@ export class UserClass extends BaseEntity {
     return this.notifications;
   }
 
-
-  getId(): number {
-    return this.id;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
-  }
 
   isActive(): boolean {
     return this.active;

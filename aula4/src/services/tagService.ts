@@ -1,8 +1,6 @@
-import { BugTask } from "models/tasks/BugTask";
-import { ITask } from "models/tasks/ITask";
+import { ITask } from "../tasks/index.js";
 
 export class TagService {
-    
   //- Uma task pode ter várias tags
   private tasks: ITask[];
 
@@ -11,27 +9,27 @@ export class TagService {
   }
 
   addTag(taskId: number, tag: string) {
-    const task: BugTask = this.tasks.find((t) => t.id === taskId) as BugTask;
+    const task = this.tasks.find((t) => t.id === taskId);
     if (task) {
-      task.addTag(tag);
+      task;
     }
   }
 
   removeTag(taskId: number, tag: string) {
-    const task: BugTask = this.tasks.find((t) => t.id === taskId) as BugTask;
+    const task = this.tasks.find((t) => t.id === taskId);
     if (task) {
-      task.removeTag(tag);
+      //task.removeTag(tag);
     }
   }
 
   getTags(taskId: number) {
-    const task: BugTask = this.tasks.find((t) => t.id === taskId) as BugTask;
-    return task.getTags();
+    // const task = this.tasks.find((t) => t.id === taskId) ;
+    //return task.getTags();
   }
 
   getTasksByTag(tag: string) {
-    return this.tasks.filter(
-      (task) => task instanceof BugTask && task.getTags().includes(tag),
-    );
+    //  return this.tasks.filter(
+    //  (task) => task.getTags().includes(tag),
+    //);
   }
 }

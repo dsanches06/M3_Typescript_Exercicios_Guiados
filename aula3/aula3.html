@@ -1,4 +1,3 @@
-<!doctype html>
 <html>
 
 <head>
@@ -121,7 +120,7 @@ export class UserClass implements IUser {
         Cria <b>models/index.ts</b> para exportar todos os modelos:
     </p>
     <pre>
-export * from './user';
+export * from './user.js';
     </pre>
     <p>
         <i>Motivo:</i> facilita imports em outros ficheiros, evitando paths longas e repetitivas.
@@ -137,20 +136,16 @@ export * from './user';
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "esnext",
+    "module": "esnext",                // ES Modules
     "moduleResolution": "node",
     "baseUrl": "./src",
-    "paths": {
-      "@models/*": ["models/*"],
-      "@services/*": ["services/*"],
-      "@ui/*": ["ui/*"],
-      "@utils/*": ["utils/*"]
-    },
     "outDir": "./dist",
-    "strict": true
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }
+
 
     </pre>
     <p>
@@ -171,7 +166,8 @@ export * from './user';
     </p>
 
     <pre>
-import { UserClass } from '@models/user';
+import { UserClass } from '../models/index.js';
+
 
 const users: UserClass[] = [];
 
@@ -204,9 +200,10 @@ export function getAllUsers(): UserClass[] {
     </p>
     <p>
         <i>Dicas:</i><br>
-        - Recebe dados da classeimport { UserClass } from '@models';
-import { addUser, getActiveUsers } from '@services';
-import { renderUsers } from '@ui';
+        - Recebe dados da classeimport { UserClass } ';
+import { UserClass } from './models/index.js';
+import { addUser, getActiveUsers } from './services/userService.js';
+import { renderUsers } from './ui/renderUser.js';
 
 const user1 = new UserClass(1, 'Alice', 'alice@email.com');
 const user2 = new UserClass(2, 'Bob', 'bob@email.com');
@@ -221,7 +218,7 @@ renderUsers(getActiveUsers());, não altera nada<br>
     </p>
 
     <pre>
-import { UserClass } from '@models/user';
+import { UserClass } from './models/index.js';
 
 export function renderUsers(users: UserClass[]) {
     const container = document.getElementById('user-container');
@@ -257,7 +254,7 @@ export function renderUsers(users: UserClass[]) {
     });
 }
 
-}
+
     </pre>
 
     <hr>
@@ -272,9 +269,9 @@ Dica: Para importar no HTML:
 </pre>
     </p>
     <pre>
-import { UserClass } from '@models/user';
-import { addUser, getActiveUsers } from '@services/userService';
-import { renderUsers } from '@ui/renderUser';
+import { UserClass } from './models/index.js';
+import { addUser, getActiveUsers } from './services/userService.js';
+import { renderUsers } from './ui/renderUser.js';
 
 const user1 = new UserClass(1, 'Alice', 'alice@email.com');
 const user2 = new UserClass(2, 'Bob', 'bob@email.com');

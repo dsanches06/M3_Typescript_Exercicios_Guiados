@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "nodenext",
+    "target": "es6",
+    "module": "esnext",                // ES Modules
+    "moduleResolution": "node",
     "baseUrl": "./src",
-    "paths": {},
     "outDir": "./dist",
-    "strict": true
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

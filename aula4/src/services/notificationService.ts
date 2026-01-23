@@ -1,19 +1,19 @@
-import { UserClass } from "models/user/UserClass";
-import { UserRole } from "security/UserRole";
+import { IUser } from "../models/index.js";
+import { UserRole } from "../security/index.js";
 
 export class NotificationService {
-  private users: UserClass[];
+  private users: IUser[];
 
-  constructor(users: UserClass[]) {
+  constructor(users: IUser[]) {
     this.users = users;
   }
 
   // Adiciona usuários ao serviço de notificação
   notifyUser(userId: number, message: string) {
-    const user:UserClass = this.users.find((u) => u.getId() === userId) as UserClass;
+    const user = this.users.find((u) => u.id === userId);
     if (user) {
       const notification = new Notification(message);
-      user.addNotification(notification);
+      console.log(notification);
     }
   }
 
@@ -24,7 +24,7 @@ export class NotificationService {
 
   // Notifica todos os administradores
   notifyAdmins(message: string) {
-    const adminUsers = this.users.filter((u) => u.getRole() === UserRole.ADMIN);
-    adminUsers.forEach((admin) => this.notifyUser(admin.getId(), message));
+   // const adminUsers = this.users.filter((u) => u.getRole() === UserRole.ADMIN);
+   // adminUsers.forEach((admin) => this.notifyUser(admin.getId(), message));
   }
 }
